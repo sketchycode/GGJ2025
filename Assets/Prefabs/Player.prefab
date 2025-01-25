@@ -84,10 +84,10 @@ MonoBehaviour:
   followTarget: {fileID: 661044304646825400}
   moveSpeed: 5
   gravity: -9.81
-  mouseSensitivityHorizontal: 100
-  mouseSensitivityVertical: 100
-  minVerticalLookAngle: -30
-  maxVerticalLookAngle: 60
+  mouseSensitivityHorizontal: 50
+  mouseSensitivityVertical: 40
+  minVerticalLookAngle: -20
+  maxVerticalLookAngle: 40
 --- !u!143 &4286131408860536058
 CharacterController:
   m_ObjectHideFlags: 0
