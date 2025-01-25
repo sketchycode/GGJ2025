@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5560776290496520961}
   - component: {fileID: 2747121278758108756}
   - component: {fileID: 1492812880588397915}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,7 +122,7 @@ GameObject:
   - component: {fileID: 5799004177804286370}
   - component: {fileID: 4286131408860536058}
   - component: {fileID: 361557714285385219}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -143,6 +143,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5305275893251025883}
+  - {fileID: 241933551305174595}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5799004177804286370
@@ -158,8 +159,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveInput: {fileID: 5957875943912597707, guid: 328af35925a824044822b340100995c5, type: 3}
+  lookInput: {fileID: 4593678513171534074, guid: 328af35925a824044822b340100995c5, type: 3}
+  followTarget: {fileID: 241933551305174595}
   moveSpeed: 5
   gravity: -9.81
+  mouseSensitivityHorizontal: 50
+  mouseSensitivityVertical: 40
+  minVerticalLookAngle: -30
+  maxVerticalLookAngle: 60
 --- !u!143 &4286131408860536058
 CharacterController:
   m_ObjectHideFlags: 0
@@ -215,3 +222,34 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!1 &7445637680427777195
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 241933551305174595}
+  m_Layer: 10
+  m_Name: FollowTarget
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &241933551305174595
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7445637680427777195}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7776921516235207196}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
