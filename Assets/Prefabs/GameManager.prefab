@@ -44,7 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3835c6b98dc421b479da45d70a6b6314, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerCamera: {fileID: 0}
+  gameObjectsContainer: {fileID: 0}
   playerPrefab: {fileID: 5799004177804286370, guid: 645424f8282e0234999a8773ca423695, type: 3}
-  _camera: {fileID: 0}
-  _gameObjectsContainer: {fileID: 0}
   powerUpPrefab: {fileID: 2084687650973897504, guid: ddb4023442f250949928589eb676a1cf, type: 3}
+  enemyPrefab: {fileID: 7253698132920331944, guid: 00ac4a711d5a44a44afe56702d66d72e, type: 3}
+  shipPrefab: {fileID: 136643507273545621, guid: 423ca645002be2d4a8e48f1b6e2333ec, type: 3}

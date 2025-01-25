@@ -1,15 +1,17 @@
 ﻿using System;
 using UnityEngine;
 
-public class Bubble : MonoBehaviour, IInteractable
+public class Bubble : MonoBehaviour, IInteractable, IDamageable
 {
     [Header("Internal References")]
     [SerializeField] private Transform model;
+    [SerializeField] private Transform captureAttachTransform;
     
     [Header("Bubble Settings")]
     [SerializeField] private float speed = 4f;
     [SerializeField] private float maxHealth = 100f;
     [SerializeField] private float playerFollowDistance = 4f;
+    [SerializeField] private float damagePerSecond = 10f;
     
     private CharacterController controller;
     private IBubbleable bubbleable;
@@ -19,7 +21,7 @@ public class Bubble : MonoBehaviour, IInteractable
     public float Health => health;
     public float MaxHealth => maxHealth;
 
-    public Transform BubbleTransform => model.transform;
+    public Transform BubbleTransform => captureAttachTransform;
     
     public void Spawn(IBubbleable bubbleable, Player player)
     {
@@ -46,16 +48,7 @@ public class Bubble : MonoBehaviour, IInteractable
                 controller.Move(vectorToPlayer.normalized.ToXZ() * (speed * Time.deltaTime));
             }
         }
-    }
-
-    public void Damage(float damage)
-    {
-        health -= damage;
-        if (health <= 0)
-        {
-            health = 0;
-            PopBubble();
-        }
+        bubbleable.TakeDamage(damagePerSecond * Time.deltaTime);
     }
 
     private void PopBubble()
@@ -73,4 +66,16 @@ public class Bubble : MonoBehaviour, IInteractable
         PopBubble();
     }
     #endregion IInteractable
+
+    #region IDamageable
+    public void TakeDamage(float damage)
+    {
+        health -= damage;
+        if (health <= 0)
+        {
+            health = 0;
+            PopBubble();
+        }
+    }
+    #endregion IDamageable
 }
