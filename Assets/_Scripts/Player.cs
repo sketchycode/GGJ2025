@@ -3,13 +3,24 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {   
+    [Header("Input Settings")]
     [SerializeField] private InputActionReference moveInput;
     [SerializeField] private InputActionReference lookInput;
+    [SerializeField] private InputActionReference interactInput;
+    
+    [Header("Internal References")]
     [SerializeField] private Transform followTarget;
+    
+    [Header("Interaction Settings")]
+    [SerializeField] private Bubble bubblePrefab; // Bubble prefab to instantiate
+    [SerializeField] private float interactRange = 3f; // Maximum range for interaction
+    [SerializeField] private LayerMask interactionLayer; 
 
     [Header("Movement Settings")]
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float gravity = -9.81f;
+    
+    [Header("Mouse Settings")]
     [SerializeField] private float mouseSensitivityHorizontal = 100f;
     [SerializeField] private float mouseSensitivityVertical = 100f;
     [SerializeField] private float minVerticalLookAngle = -45f;
@@ -22,8 +33,11 @@ public class Player : MonoBehaviour
     private Vector2 moveInputValue; // Tracks input from the Input Actions
     private Vector2 lookInputValue;
     private float cameraTiltValue; // Tracks vertical camera rotation
+    private readonly Collider[] hitColliders = new Collider[10];
+    private IInteractable closestInteractable;
     
     public Transform FollowTarget => followTarget;
+    public IInteractable ClosestInteractable => closestInteractable;
 
     private void Awake()
     {
@@ -43,6 +57,9 @@ public class Player : MonoBehaviour
         lookInput.action.Enable();
         lookInput.action.performed += OnRotateInput_Performed;
         lookInput.action.canceled += OnRotateInput_Canceled;
+        
+        interactInput.action.Enable();
+        interactInput.action.performed += OnInteractInput_Performed;
     }
 
     private void OnDisable()
@@ -54,47 +71,41 @@ public class Player : MonoBehaviour
         lookInput.action.Disable();
         lookInput.action.performed -= OnRotateInput_Performed;
         lookInput.action.canceled -= OnRotateInput_Canceled;
+        
+        interactInput.action.Disable();
+        interactInput.action.performed -= OnInteractInput_Performed;
     }
 
     private void Update()
     {
         HandleMouseLook();
         HandleMovement();
+        
+        GetClosestInteractable();
     }
 
     private void HandleMovement()
     {
-        // Convert input movement (Vector2) into world space movement
         Vector3 move = transform.right * moveInputValue.x + transform.forward * moveInputValue.y;
-
-        // Apply movement speed and move the character
         controller.Move(move * (moveSpeed * Time.deltaTime));
 
-        // Apply gravity
         if (controller.isGrounded && velocity.y < 0)
         {
             velocity.y = 0f;
         }
         velocity.y += gravity * Time.deltaTime;
-
-        // Apply gravity-based downward movement
         controller.Move(velocity * Time.deltaTime);
     }
     
     private void HandleMouseLook()
     {
-        // Apply sensitivity scaling
         float mouseX = lookInputValue.x * mouseSensitivityHorizontal * Time.deltaTime;
         float mouseY = lookInputValue.y * mouseSensitivityVertical * Time.deltaTime;
 
-        // Rotate the player along the Y-axis (horizontal rotation)
         transform.Rotate(Vector3.up * mouseX);
 
-        // Rotate the camera along the X-axis (vertical rotation)
-        cameraTiltValue -= mouseY; // Invert y-axis for natural mouse movement
-        cameraTiltValue = Mathf.Clamp(cameraTiltValue, minVerticalLookAngle, maxVerticalLookAngle); // Clamp rotation to avoid over-rotation
-
-        // Apply the calculated rotation to the camera
+        cameraTiltValue -= mouseY;
+        cameraTiltValue = Mathf.Clamp(cameraTiltValue, minVerticalLookAngle, maxVerticalLookAngle);
         followTarget.localRotation = Quaternion.Euler(cameraTiltValue, 0f, 0f);
     }
 
@@ -118,5 +129,35 @@ public class Player : MonoBehaviour
     private void OnRotateInput_Canceled(InputAction.CallbackContext obj)
     {
         lookInputValue = Vector2.zero;
+    }
+
+    private void OnInteractInput_Performed(InputAction.CallbackContext obj)
+    {
+        closestInteractable?.Interact();
+    }
+    
+    private void GetClosestInteractable()
+    {
+        var hitCount = Physics.OverlapSphereNonAlloc(followTarget.position, interactRange, hitColliders, interactionLayer);
+        closestInteractable = null;
+        float closestDistance = Mathf.Infinity;
+
+        for (int i = 0; i < hitCount && i < hitColliders.Length; i++)
+        {
+            var hitCollider = hitColliders[i];
+            Vector3 directionToObject = (hitCollider.transform.position - followTarget.position).normalized;
+
+            float angle = Vector3.Angle(followTarget.forward, directionToObject);
+            if (angle <= 30f) // 30 degrees to either side = 60 degrees total arc
+            {
+                float distance = Vector3.Distance(followTarget.position, hitCollider.transform.position);
+                IInteractable interactable = hitCollider.GetComponentInParent<IInteractable>();
+                if (interactable != null && interactable.CanInteract && distance < closestDistance)
+                {
+                    closestInteractable = interactable;
+                    closestDistance = distance;
+                }
+            }
+        }
     }
 }
