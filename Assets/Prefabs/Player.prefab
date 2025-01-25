@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 2652486682902883177}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.697, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -81,7 +81,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveInput: {fileID: 5957875943912597707, guid: 328af35925a824044822b340100995c5, type: 3}
   lookInput: {fileID: 4593678513171534074, guid: 328af35925a824044822b340100995c5, type: 3}
+  interactInput: {fileID: -6812486663553711104, guid: 328af35925a824044822b340100995c5, type: 3}
   followTarget: {fileID: 661044304646825400}
+  bubblePrefab: {fileID: 2674325371147267787, guid: 73c556afe95387a4abcb30fed86afd9a, type: 3}
+  interactRange: 3
+  interactionLayer:
+    serializedVersion: 2
+    m_Bits: 2048
   moveSpeed: 5
   gravity: -9.81
   mouseSensitivityHorizontal: 50

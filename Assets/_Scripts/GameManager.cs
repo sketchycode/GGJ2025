@@ -1,12 +1,15 @@
-using System;
 using Unity.Cinemachine;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    [Header("Instanced References")]
+    [SerializeField] private CinemachineCamera playerCamera;
+    [SerializeField] private Transform gameObjectsContainer;
+    
+    [Header("Prefabs")]
     [SerializeField] private Player playerPrefab;
-    [SerializeField] private CinemachineCamera _camera;
-    [SerializeField] private Transform _gameObjectsContainer;
+    [SerializeField] private PowerUp powerUpPrefab;
     
     private Player _player;
     
@@ -17,8 +20,12 @@ public class GameManager : MonoBehaviour
         Cursor.visible = false;
         
         // Spawn the player
-        _player = Instantiate(playerPrefab, _gameObjectsContainer);
-        _camera.Follow = _player.FollowTarget;
-        _camera.LookAt = _player.FollowTarget;
+        _player = Instantiate(playerPrefab, gameObjectsContainer);
+        playerCamera.Follow = _player.FollowTarget;
+        playerCamera.LookAt = _player.FollowTarget;
+        
+        var powerUp = Instantiate(powerUpPrefab, gameObjectsContainer);
+        powerUp.transform.position = new Vector3(0, 0, 1);
+        powerUp.Spawn(_player);
     }
 }
