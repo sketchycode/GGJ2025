@@ -60,7 +60,9 @@ public class Bubble : MonoBehaviour, IInteractable
 
     private void PopBubble()
     {
+        model.GetComponent<Collider>().enabled = false;
         bubbleable.PopBubble();
+        Destroy(gameObject);
     }
 
     #region IInteractable

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5122129476392320387}
   - component: {fileID: 2674325371147267787}
   - component: {fileID: 3522260579723044134}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Bubble
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47,9 +47,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   model: {fileID: 8104442740283121721}
-  controller: {fileID: 3522260579723044134}
   speed: 4
   maxHealth: 100
+  playerFollowDistance: 4
 --- !u!143 &3522260579723044134
 CharacterController:
   m_ObjectHideFlags: 0
@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 3460553469852438121}
   - component: {fileID: 9088169285455437378}
   - component: {fileID: 6697706485178317566}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}

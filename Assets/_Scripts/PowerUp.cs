@@ -9,6 +9,7 @@ public class PowerUp : MonoBehaviour, IInteractable, IBubbleable
     
     [Header("Bubble Settings")]
     [SerializeField] private Bubble bubblePrefab;
+    [SerializeField] private LayerMask groundLayer;
     
     private int floatUpAnimId = -1;
     private int spinAnimId = -1;
@@ -18,17 +19,9 @@ public class PowerUp : MonoBehaviour, IInteractable, IBubbleable
     private Transform originalParent;
     private Player player;
 
-    public bool CanInteract => true;
-
     public void Spawn(Player player)
     {
         this.player = player;
-    }
-
-    public void Interact()
-    {
-        var bubble = Instantiate(bubblePrefab, modelCollider.transform.position, Quaternion.identity);
-        bubble.Spawn(this, player);
     }
 
     private void Awake()
@@ -71,10 +64,9 @@ public class PowerUp : MonoBehaviour, IInteractable, IBubbleable
         floatUpAnimId = -1;
         spinAnimId = -1;
         
-        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit))
+        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 100f, groundLayer))
         {
-            Vector3 targetPosition = hit.point + Vector3.up * 0.5f; // Add a Y-offset of 0.5f (adjustable)
-
+            Vector3 targetPosition = hit.point;
             floatUpAnimId = LeanTween.move(gameObject, targetPosition, 0.5f).setEaseInExpo().id;
             spinAnimId = LeanTween.rotateLocal(modelCollider.gameObject, Vector3.zero, 0.2f).id;
         }
@@ -83,6 +75,16 @@ public class PowerUp : MonoBehaviour, IInteractable, IBubbleable
             Debug.LogWarning("No ground detected below the PowerUp!");
         }
     }
+
+    #region IInteractable
+    public bool CanInteract => !isBubbled;
+
+    public void Interact()
+    {
+        var bubble = Instantiate(bubblePrefab, modelCollider.transform.position, Quaternion.identity);
+        bubble.Spawn(this, player);
+    }
+    #endregion IInteractable
 
     #region IBubbleable
 
