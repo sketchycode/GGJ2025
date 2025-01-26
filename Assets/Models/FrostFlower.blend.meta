@@ -3,7 +3,12 @@ guid: 58a7bea16c383ec48b62c2717cda24e6
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FrostElement_Material
+    second: {fileID: 2100000, guid: b589bc749eddd9545b1999002c6d982f, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
