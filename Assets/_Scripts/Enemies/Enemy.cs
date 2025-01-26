@@ -43,6 +43,7 @@ public class Enemy : MonoBehaviour, IInteractable, IBubbleable, IDamageable
     private int attackAnimId = -1;
 
     public event Action<Enemy> HealthChanged;
+    public event Action<Enemy> Died;
     
     public bool IsBubbled => bubble != null;
 
@@ -217,6 +218,7 @@ public class Enemy : MonoBehaviour, IInteractable, IBubbleable, IDamageable
         if (bubble != null) bubble.TakeDamage(bubble.Health);
 
         powerUpPool.Spawn(transform);
+        Died?.Invoke(this);
     }
 
     #region IInteractable
@@ -234,7 +236,6 @@ public class Enemy : MonoBehaviour, IInteractable, IBubbleable, IDamageable
     
     public void Bubble(Bubble bubble)
     {
-        Debug.Log("Enemy bubbled");
         this.bubble = bubble;
         Interrupt();
         
@@ -245,7 +246,6 @@ public class Enemy : MonoBehaviour, IInteractable, IBubbleable, IDamageable
 
     public void PopBubble()
     {
-        Debug.Log("Enemy bubble popped");
         CancelAttack();
         bubble = null;
         
