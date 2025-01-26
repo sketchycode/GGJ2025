@@ -151,9 +151,6 @@ public class PowerUp : MonoBehaviour, IInteractable, IBubbleable
     #endregion IInteractable
 
     #region IBubbleable
-
-    bool IBubbleable.MoveToPlayer => true;
-
     void IBubbleable.Bubble(Bubble bubble)
     {
         isBubbled = true;
@@ -179,6 +176,5 @@ public class PowerUp : MonoBehaviour, IInteractable, IBubbleable
     {
         // do nothing
     }
-
     #endregion IBubbleable
 }

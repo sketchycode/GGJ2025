@@ -2,13 +2,14 @@
 
 public class EnemyObjectPool : ObjectPool<Enemy>
 {
-    public PowerUpObjectPool PowerUpObjectPool { get; set; }
+    [SerializeField] private PowerUpObjectPool powerUpObjectPool;
+    
     public Ship Ship { get; set; }
     
     public Enemy Spawn(Transform spawnPoint)
     {
         var enemy = Spawn();
-        enemy.Spawn(new [] { Ship.transform }, Ship);
+        enemy.Spawn(Ship, powerUpObjectPool);
         enemy.transform.position = spawnPoint.position;
         return enemy;
     }

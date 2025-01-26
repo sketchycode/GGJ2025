@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 641752843599096569}
   - component: {fileID: 8971339473403977683}
   - component: {fileID: 4805458520605745486}
-  - component: {fileID: 7006227665158048583}
   m_Layer: 0
   m_Name: ObjectPools
   m_TagString: Untagged
@@ -31,7 +30,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2590318105261089945}
+  - {fileID: 8579754084792334363}
   m_Father: {fileID: 5637034355029330649}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8971339473403977683
@@ -46,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ac13c99edf7414daca08149eb2ce969, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
+  prefab: {fileID: 1319828153978350444, guid: f5b7ddb547107f541b277903f0341214, type: 3}
   initialPoolSize: 20
   shotPool: {fileID: 4805458520605745486}
 --- !u!114 &4805458520605745486
@@ -63,20 +64,99 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 4384221500905550291, guid: d9ca2b58e9318c24dad3b2d7c573ca78, type: 3}
   initialPoolSize: 100
---- !u!114 &7006227665158048583
+--- !u!1 &935754828329917383
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2590318105261089945}
+  - component: {fileID: 3203129471315721051}
+  m_Layer: 0
+  m_Name: Gooblin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2590318105261089945
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 935754828329917383}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 641752843599096569}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3203129471315721051
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 18635953764889393}
+  m_GameObject: {fileID: 935754828329917383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9370684d5867492984358474bf0ce878, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 3558296868853722477, guid: a2d0bcc0866593d4db86f229b6b41e8d, type: 3}
+  initialPoolSize: 20
+  powerUpObjectPool: {fileID: 5580469545700384871}
+--- !u!1 &1853182172686757027
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8579754084792334363}
+  - component: {fileID: 5580469545700384871}
+  m_Layer: 0
+  m_Name: FrostFlower
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8579754084792334363
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1853182172686757027}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 641752843599096569}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5580469545700384871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1853182172686757027}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b28b943b10024890bcd939dcd3b1a286, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 7953251870693459485, guid: fd731064503074a4eae8984cb44d3d4a, type: 3}
-  initialPoolSize: 10
+  initialPoolSize: 20
 --- !u!1 &3870585637079440520
 GameObject:
   m_ObjectHideFlags: 0
@@ -132,6 +212,7 @@ MonoBehaviour:
   shipPrefab: {fileID: 136643507273545621, guid: 423ca645002be2d4a8e48f1b6e2333ec, type: 3}
   towerObjectPool: {fileID: 8971339473403977683}
   towerShotObjectPool: {fileID: 4805458520605745486}
-  powerUpObjectPool: {fileID: 7006227665158048583}
+  frostFlowerPowerUpObjectPool: {fileID: 5580469545700384871}
+  gooblinObjectPool: {fileID: 3203129471315721051}
   shotConfig: {fileID: 11400000, guid: 524441a2b69127846b1c3b0c26a525b7, type: 2}
   shotModifier: {fileID: 11400000, guid: c9b09f59369725d42898a62427510bd8, type: 2}

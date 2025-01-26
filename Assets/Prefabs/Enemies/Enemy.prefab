@@ -9,11 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1772552540063552756}
-  - component: {fileID: 6208931107661968427}
-  - component: {fileID: 6999276695295559222}
   - component: {fileID: 1262235644839969686}
   m_Layer: 13
-  m_Name: Capsule
+  m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34,59 +32,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3398463819890898521}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &6208931107661968427
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1333772869544062128}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &6999276695295559222
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1333772869544062128}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!136 &1262235644839969686
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -122,7 +67,7 @@ GameObject:
   - component: {fileID: 7253698132920331944}
   - component: {fileID: 1037280710137509826}
   m_Layer: 13
-  m_Name: SmallGooblin
+  m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -156,7 +101,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c655c8bd1fbb4d96acce7c3350ae142f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  modelCollider: {fileID: 1262235644839969686}
+  _collider: {fileID: 1262235644839969686}
+  model: {fileID: 0}
   waypointTolerance: 0.5
   bubblePrefab: {fileID: 2674325371147267787, guid: 73c556afe95387a4abcb30fed86afd9a, type: 3}
   groundLayer:
@@ -166,6 +112,8 @@ MonoBehaviour:
   damageToShip: 10
   damageToBubble: 20
   attackSpeed: 1
+  shotConfig: {fileID: 11400000, guid: 524441a2b69127846b1c3b0c26a525b7, type: 2}
+  animator: {fileID: 0}
 --- !u!195 &1037280710137509826
 NavMeshAgent:
   m_ObjectHideFlags: 0
