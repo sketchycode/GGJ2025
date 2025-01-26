@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Cinemachine;
@@ -21,8 +20,10 @@ public class GameManager : MonoBehaviour
     [Header("Internal References")]
     [SerializeField] private TowerObjectPool towerObjectPool;
     [SerializeField] private TowerShotObjectPool towerShotObjectPool;
-    [SerializeField] private PowerUpObjectPool frostFlowerPowerUpObjectPool;
+    [SerializeField] private PowerUpObjectPool frostPowerUpObjectPool;
+    [SerializeField] private PowerUpObjectPool firePowerUpObjectPool;
     [SerializeField] private EnemyObjectPool gooblinObjectPool;
+    [SerializeField] private EnemyObjectPool crabObjectPool;
     
     [Header("Wave Management")]
     [SerializeField] private List<EnemyWaveConfig> waveConfigs;
@@ -92,11 +93,16 @@ public class GameManager : MonoBehaviour
     {
         towerObjectPool.OverrideParentTransform = gameObjectsContainer;
         towerShotObjectPool.OverrideParentTransform = gameObjectsContainer;
-        frostFlowerPowerUpObjectPool.OverrideParentTransform = gameObjectsContainer;
+        frostPowerUpObjectPool.OverrideParentTransform = gameObjectsContainer;
+        firePowerUpObjectPool.OverrideParentTransform = gameObjectsContainer;
         gooblinObjectPool.OverrideParentTransform = gameObjectsContainer;
+        crabObjectPool.OverrideParentTransform = gameObjectsContainer;
         
-        frostFlowerPowerUpObjectPool.Player = player;
+        frostPowerUpObjectPool.Player = player;
+        firePowerUpObjectPool.Player = player;
+        
         gooblinObjectPool.Ship = ship;
+        crabObjectPool.Ship = ship;
     }
     
     private IEnumerator StartWave(EnemyWaveConfig config, float delay)
