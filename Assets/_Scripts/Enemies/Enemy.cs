@@ -21,31 +21,31 @@ public class Enemy : MonoBehaviour, IInteractable, IBubbleable, IDamageable
     [SerializeField] private float damageToShip = 10f;
     [SerializeField] private float damageToBubble = 20f;
     [SerializeField] private float attackSpeed = 1f;
+    [SerializeField] private TowerShotConfig shotConfig;
 
     private NavMeshAgent agent;
     private int currentWaypointIndex = 0;
     private bool isInterrupted = false;
     private Transform[] waypoints;
     private Ship ship;
+    private PowerUpObjectPool powerUpPool;
     private Bubble bubble;
     private int floatUpAnimId = -1;
     private int spinAnimId = -1;
     private Transform originalParent;
-    private Player player;
     private float health;
     private Coroutine attackingCoroutine;
     private Vector3 rotationAxis;
 
     public event Action<Enemy> HealthChanged;
-    public event Action<Enemy> Died;
     
     public bool IsBubbled => bubble != null;
 
-    public void Spawn(Transform[] waypoints, Player player, Ship ship)
+    public void Spawn(Ship ship, PowerUpObjectPool powerUpPool)
     {
-        this.waypoints = waypoints;
-        this.player = player;
+        this.waypoints = new [] { ship.transform };
         this.ship = ship;
+        this.powerUpPool = powerUpPool;
         
         health = maxHealth;
     }
@@ -199,7 +199,9 @@ public class Enemy : MonoBehaviour, IInteractable, IBubbleable, IDamageable
     {
         Destroy(gameObject);
         if (bubble != null) bubble.TakeDamage(bubble.Health);
-        Died?.Invoke(this);
+
+        var powerUp = powerUpPool.Spawn(transform);
+        
     }
 
     #region IInteractable
@@ -208,7 +210,7 @@ public class Enemy : MonoBehaviour, IInteractable, IBubbleable, IDamageable
     public void Interact()
     {
         var bubble = Instantiate(bubblePrefab, modelCollider.transform.position, Quaternion.identity);
-        bubble.Spawn(this, player);
+        bubble.Spawn(this, null);
     }
     #endregion IInteractable
 
