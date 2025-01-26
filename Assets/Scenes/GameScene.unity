@@ -730,6 +730,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 518530843}
     - target: {fileID: 2531388182455675347, guid: 9e28aac5da561c74782e1fe91d6d5ce0, type: 3}
+      propertyPath: waveConfigs.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2531388182455675347, guid: 9e28aac5da561c74782e1fe91d6d5ce0, type: 3}
       propertyPath: 'waypoints.Array.data[0]'
       value: 
       objectReference: {fileID: 0}
@@ -741,6 +745,54 @@ PrefabInstance:
       propertyPath: 'waypoints.Array.data[2]'
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2531388182455675347, guid: 9e28aac5da561c74782e1fe91d6d5ce0, type: 3}
+      propertyPath: waveConfigs.Array.data[0].Wave.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2531388182455675347, guid: 9e28aac5da561c74782e1fe91d6d5ce0, type: 3}
+      propertyPath: waveConfigs.Array.data[1].Wave.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2531388182455675347, guid: 9e28aac5da561c74782e1fe91d6d5ce0, type: 3}
+      propertyPath: waveConfigs.Array.data[2].Wave.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2531388182455675347, guid: 9e28aac5da561c74782e1fe91d6d5ce0, type: 3}
+      propertyPath: waveConfigs.Array.data[0].Wave.Array.data[0].Pool
+      value: 
+      objectReference: {fileID: 7841358158920712065}
+    - target: {fileID: 2531388182455675347, guid: 9e28aac5da561c74782e1fe91d6d5ce0, type: 3}
+      propertyPath: waveConfigs.Array.data[1].Wave.Array.data[0].Pool
+      value: 
+      objectReference: {fileID: 7841358158920712065}
+    - target: {fileID: 2531388182455675347, guid: 9e28aac5da561c74782e1fe91d6d5ce0, type: 3}
+      propertyPath: waveConfigs.Array.data[2].Wave.Array.data[0].Pool
+      value: 
+      objectReference: {fileID: 7841358158920712065}
+    - target: {fileID: 2531388182455675347, guid: 9e28aac5da561c74782e1fe91d6d5ce0, type: 3}
+      propertyPath: waveConfigs.Array.data[0].Wave.Array.data[0].Count
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2531388182455675347, guid: 9e28aac5da561c74782e1fe91d6d5ce0, type: 3}
+      propertyPath: waveConfigs.Array.data[1].Wave.Array.data[0].Count
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2531388182455675347, guid: 9e28aac5da561c74782e1fe91d6d5ce0, type: 3}
+      propertyPath: waveConfigs.Array.data[2].Wave.Array.data[0].Count
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2531388182455675347, guid: 9e28aac5da561c74782e1fe91d6d5ce0, type: 3}
+      propertyPath: waveConfigs.Array.data[0].Wave.Array.data[0].SpawnPoint
+      value: 
+      objectReference: {fileID: 267399232}
+    - target: {fileID: 2531388182455675347, guid: 9e28aac5da561c74782e1fe91d6d5ce0, type: 3}
+      propertyPath: waveConfigs.Array.data[1].Wave.Array.data[0].SpawnPoint
+      value: 
+      objectReference: {fileID: 267399232}
+    - target: {fileID: 2531388182455675347, guid: 9e28aac5da561c74782e1fe91d6d5ce0, type: 3}
+      propertyPath: waveConfigs.Array.data[2].Wave.Array.data[0].SpawnPoint
+      value: 
+      objectReference: {fileID: 267399232}
     - target: {fileID: 3870585637079440520, guid: 9e28aac5da561c74782e1fe91d6d5ce0, type: 3}
       propertyPath: m_Name
       value: GameManager
@@ -794,6 +846,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9e28aac5da561c74782e1fe91d6d5ce0, type: 3}
+--- !u!114 &7841358158920712065 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1565829187758924809, guid: 9e28aac5da561c74782e1fe91d6d5ce0, type: 3}
+  m_PrefabInstance: {fileID: 7841358158920712064}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9370684d5867492984358474bf0ce878, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

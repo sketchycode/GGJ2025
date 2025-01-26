@@ -1,6 +1,8 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using Unity.Cinemachine;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
 {
@@ -22,21 +24,44 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PowerUpObjectPool frostFlowerPowerUpObjectPool;
     [SerializeField] private EnemyObjectPool gooblinObjectPool;
     
+    [Header("Wave Management")]
+    [SerializeField] private List<EnemyWaveConfig> waveConfigs;
+    [SerializeField] private float timeBetweenWaves = 30f;
+    
     [Header("Debug Stuff")]
     [SerializeField] private TowerShotConfig shotConfig;
     [SerializeField] private TowerShotModifier shotModifier;
     
     private Player player;
     private Ship ship;
-
-    private int numEnemies = 5;
+    
+    private int currentWaveIndex;
+    
+    public float WaveProgress => currentWaveIndex / (float) waveConfigs.Count;
+    public bool InAttackPhase { get; private set; }
+    public float BuildPhaseRemainingTime { get; private set; }
+    public int EnemiesRemainingCurrentWave { get; private set; }
     
     private void Start()
     {
         InitializeGameScene();
         ConfigureObjectPools();
+        
+        StartCoroutine(StartGame());
+    }
 
-        TempSetupStuff();
+    private void Update()
+    {
+        if (!InAttackPhase)
+        {
+            BuildPhaseRemainingTime -= Time.deltaTime;
+            BuildPhaseRemainingTime = Mathf.Max(BuildPhaseRemainingTime, 0f);
+        }
+    }
+
+    private IEnumerator StartGame()
+    {
+        yield return StartWave(waveConfigs[currentWaveIndex], 10f);
     }
 
     private void InitializeGameScene()
@@ -60,6 +85,7 @@ public class GameManager : MonoBehaviour
     {
         ship = Instantiate(shipPrefab, gameObjectsContainer);
         ship.transform.position = level.ShipSpawnPoint.position;
+        ship.Died += OnShip_Died;
     }
 
     private void ConfigureObjectPools()
@@ -73,17 +99,59 @@ public class GameManager : MonoBehaviour
         gooblinObjectPool.Ship = ship;
     }
     
-    private void TempSetupStuff()
+    private IEnumerator StartWave(EnemyWaveConfig config, float delay)
     {
-        foreach (var spawnPoint in level.SpawnPoints)
+        InAttackPhase = false;
+        BuildPhaseRemainingTime = delay;
+        yield return new WaitForSeconds(delay);
+
+        InAttackPhase = true;
+        foreach (var enemySpawn in config.Wave)
         {
-            for (int i = 0; i < numEnemies; i++)
+            for (int i = 0; i < enemySpawn.Count; i++)
             {
-                gooblinObjectPool.Spawn(spawnPoint);
+                EnemiesRemainingCurrentWave++;
+                var enemy = enemySpawn.Pool.Spawn(enemySpawn.SpawnPoint);
+                enemy.Died += OnEnemy_Died;
             }
         }
-        
-        var tower = towerObjectPool.Spawn(shotConfig);
-        tower.Install(level.InstallPoints[0]);
+    }
+
+    private void HandleWaveCompleted()
+    {
+        currentWaveIndex++;
+        if (currentWaveIndex < waveConfigs.Count)
+        {
+            StartCoroutine(StartWave(waveConfigs[currentWaveIndex], timeBetweenWaves));
+        }
+        else
+        {
+            HandleWinGame();
+        }
+    }
+
+    private void HandleWinGame()
+    {
+        Debug.Log("Win Game");
+    }
+
+    private void HandleLoseGame()
+    {
+        Debug.Log("Lose Game");
+    }
+
+    private void OnEnemy_Died(Enemy obj)
+    {
+        EnemiesRemainingCurrentWave--;
+
+        if (EnemiesRemainingCurrentWave == 0)
+        {
+            HandleWaveCompleted();
+        }
+    }
+
+    private void OnShip_Died(Ship obj)
+    {
+        HandleLoseGame();
     }
 }
