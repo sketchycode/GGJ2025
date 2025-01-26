@@ -5,9 +5,21 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/TomTitleScreen.unity
+    guid: f668f4c0648daa747903d608710ded92
+  - enabled: 1
+    path: Assets/Scenes/GameScene.unity
+    guid: 570b2db7986dce3409158dc5a272eb07
+  - enabled: 1
+    path: Assets/Scenes/TomWinScreen.unity
+    guid: b26c86fd9f1b960429806ed5c7800e43
+  - enabled: 1
+    path: Assets/Scenes/TomLoseScreen.unity
+    guid: 717ccfe50e0df104ca39b4fa1a1e8fb9
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
