@@ -16,10 +16,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PowerUp powerUpPrefab;
     [SerializeField] private Enemy enemyPrefab;
     [SerializeField] private Ship shipPrefab;
-    
+
     [Header("Internal References")]
-    [SerializeField] private TowerObjectPool towerObjectPool;
-    [SerializeField] private TowerShotObjectPool towerShotObjectPool;
+    [SerializeField] private TowerObjectPool fireTowerPool;
+    [SerializeField] private TowerObjectPool frostTowerPool;
+    [SerializeField] private TowerShotObjectPool fireTowerShotPool;
+    [SerializeField] private TowerShotObjectPool frostTowerShotPool;
     [SerializeField] private PowerUpObjectPool frostPowerUpObjectPool;
     [SerializeField] private PowerUpObjectPool firePowerUpObjectPool;
     [SerializeField] private EnemyObjectPool gooblinObjectPool;
@@ -91,8 +93,10 @@ public class GameManager : MonoBehaviour
 
     private void ConfigureObjectPools()
     {
-        towerObjectPool.OverrideParentTransform = gameObjectsContainer;
-        towerShotObjectPool.OverrideParentTransform = gameObjectsContainer;
+        fireTowerPool.OverrideParentTransform = gameObjectsContainer;
+        frostTowerPool.OverrideParentTransform = gameObjectsContainer;
+        fireTowerShotPool.OverrideParentTransform = gameObjectsContainer;
+        frostTowerShotPool.OverrideParentTransform = gameObjectsContainer;
         frostPowerUpObjectPool.OverrideParentTransform = gameObjectsContainer;
         firePowerUpObjectPool.OverrideParentTransform = gameObjectsContainer;
         gooblinObjectPool.OverrideParentTransform = gameObjectsContainer;
