@@ -2011,11 +2011,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2531388182455675347, guid: 9e28aac5da561c74782e1fe91d6d5ce0, type: 3}
       propertyPath: waveConfigs.Array.data[1].Wave.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2531388182455675347, guid: 9e28aac5da561c74782e1fe91d6d5ce0, type: 3}
       propertyPath: waveConfigs.Array.data[2].Wave.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2531388182455675347, guid: 9e28aac5da561c74782e1fe91d6d5ce0, type: 3}
       propertyPath: waveConfigs.Array.data[3].Wave.Array.size
@@ -2045,6 +2045,10 @@ PrefabInstance:
       propertyPath: waveConfigs.Array.data[1].Wave.Array.data[0].Pool
       value: 
       objectReference: {fileID: 7841358158920712065}
+    - target: {fileID: 2531388182455675347, guid: 9e28aac5da561c74782e1fe91d6d5ce0, type: 3}
+      propertyPath: waveConfigs.Array.data[1].Wave.Array.data[1].Pool
+      value: 
+      objectReference: {fileID: 906131035}
     - target: {fileID: 2531388182455675347, guid: 9e28aac5da561c74782e1fe91d6d5ce0, type: 3}
       propertyPath: waveConfigs.Array.data[2].Wave.Array.data[0].Pool
       value: 
@@ -2118,6 +2122,10 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2531388182455675347, guid: 9e28aac5da561c74782e1fe91d6d5ce0, type: 3}
+      propertyPath: waveConfigs.Array.data[1].Wave.Array.data[1].Count
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2531388182455675347, guid: 9e28aac5da561c74782e1fe91d6d5ce0, type: 3}
       propertyPath: waveConfigs.Array.data[2].Wave.Array.data[0].Count
       value: 7
       objectReference: {fileID: 0}
@@ -2187,6 +2195,10 @@ PrefabInstance:
       objectReference: {fileID: 267399232}
     - target: {fileID: 2531388182455675347, guid: 9e28aac5da561c74782e1fe91d6d5ce0, type: 3}
       propertyPath: waveConfigs.Array.data[1].Wave.Array.data[0].SpawnPoint
+      value: 
+      objectReference: {fileID: 267399232}
+    - target: {fileID: 2531388182455675347, guid: 9e28aac5da561c74782e1fe91d6d5ce0, type: 3}
+      propertyPath: waveConfigs.Array.data[1].Wave.Array.data[1].SpawnPoint
       value: 
       objectReference: {fileID: 267399232}
     - target: {fileID: 2531388182455675347, guid: 9e28aac5da561c74782e1fe91d6d5ce0, type: 3}

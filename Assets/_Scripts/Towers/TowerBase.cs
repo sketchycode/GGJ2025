@@ -10,11 +10,15 @@ public class TowerBase : MonoBehaviour, IPowerUppable
     
     [SerializeField] private Transform powerUpDragPoint;
     [SerializeField] private Transform modelTransform;
-    
+
+    private bool isPoweredUp = false;
+
+    public bool IsPowerUppable => !isPoweredUp;
     public Transform AttachPoint => powerUpDragPoint;
     
     public void CollectPowerUp(PowerUp powerUp)
     {
+        isPoweredUp = true;
         powerUp.DragToTower(this, () => BeginInstallTower(powerUp));
     }
 

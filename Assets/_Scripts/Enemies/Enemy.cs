@@ -59,6 +59,8 @@ public class Enemy : MonoBehaviour, IInteractable, IBubbleable, IDamageable
         
         health = maxHealth;
         animator.SetBool(isRunningAnimId, true);
+        currentWaypointIndex = 0;
+        isInterrupted = false;
     }
     
     private void Awake()
@@ -139,6 +141,8 @@ public class Enemy : MonoBehaviour, IInteractable, IBubbleable, IDamageable
 
     public void Resume()
     {
+        if (!gameObject.activeInHierarchy) return;
+        
         isInterrupted = false;
         agent.enabled = true;
         agent.isStopped = false;
@@ -218,8 +222,14 @@ public class Enemy : MonoBehaviour, IInteractable, IBubbleable, IDamageable
 
     private void Die()
     {
+        LeanTween.cancel(gameObject, floatUpAnimId);
+        LeanTween.cancel(gameObject, spinAnimId);
+        floatUpAnimId = -1;
+        spinAnimId = -1;
+
         audioSource.PlayOneShot(deathClip);
-        enemyPool.Despawn(this);
+        agent.enabled = false;
+        LeanTween.delayedCall(gameObject, 0.3f, () => Destroy(gameObject));
         if (bubble != null) bubble.TakeDamage(bubble.Health);
 
         powerUpPool.Spawn(transform);
