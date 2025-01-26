@@ -6,7 +6,8 @@ using Random = UnityEngine.Random;
 public class PowerUp : MonoBehaviour, IInteractable, IBubbleable
 {
     [Header("Internal References")]
-    [SerializeField] private Collider modelCollider;
+    [SerializeField] private new Collider collider;
+    [SerializeField] private Transform model;
     
     [Header("Bubble Settings")]
     [SerializeField] private Bubble bubblePrefab;
@@ -55,7 +56,7 @@ public class PowerUp : MonoBehaviour, IInteractable, IBubbleable
     {
         if (isBubbled)
         {
-            modelCollider.transform.Rotate(rotationAxis, 60 * Time.deltaTime);
+            model.transform.Rotate(rotationAxis, 60 * Time.deltaTime);
         }
     }
 
@@ -84,7 +85,7 @@ public class PowerUp : MonoBehaviour, IInteractable, IBubbleable
                 .setEaseInExpo()
                 .setOnComplete(_ => { if (notifyTower) NotifyTower(); })
                 .id;
-            spinAnimId = LeanTween.rotateLocal(modelCollider.gameObject, Vector3.zero, 0.2f).id;
+            spinAnimId = LeanTween.rotateLocal(model.gameObject, Vector3.zero, 0.2f).id;
         }
         else
         {
@@ -144,7 +145,7 @@ public class PowerUp : MonoBehaviour, IInteractable, IBubbleable
 
     public void Interact()
     {
-        var bubble = Instantiate(bubblePrefab, modelCollider.transform.position, Quaternion.identity);
+        var bubble = Instantiate(bubblePrefab, collider.transform.position, Quaternion.identity);
         bubble.Spawn(this, player);
     }
     #endregion IInteractable
@@ -156,7 +157,7 @@ public class PowerUp : MonoBehaviour, IInteractable, IBubbleable
     void IBubbleable.Bubble(Bubble bubble)
     {
         isBubbled = true;
-        modelCollider.enabled = false;
+        collider.enabled = false;
         transform.SetParent(bubble.BubbleTransform, true);
         FloatUpToBubble();
     }
@@ -164,14 +165,14 @@ public class PowerUp : MonoBehaviour, IInteractable, IBubbleable
     void IBubbleable.PopBubble()
     {
         isBubbled = false;
-        modelCollider.enabled = true;
+        collider.enabled = true;
         transform.SetParent(originalParent, true);
         DropToGround();
     }
     
     Vector3 IBubbleable.GetBubbleWorldPosition()
     {
-        return modelCollider.transform.position;
+        return collider.transform.position;
     }
 
     public void TakeDamage(float damage)

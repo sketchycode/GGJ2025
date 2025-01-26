@@ -75,9 +75,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b28b943b10024890bcd939dcd3b1a286, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 2084687650973897504, guid: ddb4023442f250949928589eb676a1cf, type: 3}
+  prefab: {fileID: 7953251870693459485, guid: fd731064503074a4eae8984cb44d3d4a, type: 3}
   initialPoolSize: 10
-  firePowerUpModifier: {fileID: 11400000, guid: b657586643d6b6143812662f3fd0eb32, type: 2}
 --- !u!1 &3870585637079440520
 GameObject:
   m_ObjectHideFlags: 0
