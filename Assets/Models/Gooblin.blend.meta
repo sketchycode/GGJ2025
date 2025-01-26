@@ -3,7 +3,12 @@ guid: 289a377826e5b5243885e6362da83c0a
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Gooblin_Material
+    second: {fileID: 2100000, guid: 3c13537212ab58c4d813c117c04b3c69, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
