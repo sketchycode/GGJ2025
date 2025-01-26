@@ -39,11 +39,14 @@ public class GameManager : MonoBehaviour
     private Ship ship;
     
     private int currentWaveIndex;
-    
-    public float WaveProgress => currentWaveIndex / (float) waveConfigs.Count;
+
+    public int CurrentWave => currentWaveIndex;
+    public int MaxWaves => waveConfigs.Count;
     public bool InAttackPhase { get; private set; }
     public float BuildPhaseRemainingTime { get; private set; }
     public int EnemiesRemainingCurrentWave { get; private set; }
+    public float ShipHealth => ship.CurrentHealth;
+    public float ShipMaxHealth => ship.MaxHealth;
     
     private void Start()
     {
@@ -87,6 +90,7 @@ public class GameManager : MonoBehaviour
     private void SetupShip()
     {
         ship = Instantiate(shipPrefab, gameObjectsContainer);
+        ship.Spawn();
         ship.transform.position = level.ShipSpawnPoint.position;
         ship.Died += OnShip_Died;
     }
