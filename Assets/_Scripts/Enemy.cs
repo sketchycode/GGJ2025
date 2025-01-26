@@ -93,7 +93,7 @@ public class Enemy : MonoBehaviour, IInteractable, IBubbleable, IDamageable
 
     private void MoveToWaypoint()
     {
-        if (currentWaypointIndex == waypoints.Length - 1)
+        if (currentWaypointIndex == waypoints.Length)
         {
             BeginAttackingShip();
         }
@@ -105,11 +105,7 @@ public class Enemy : MonoBehaviour, IInteractable, IBubbleable, IDamageable
 
     private void MoveToNextWaypoint()
     {
-        if (currentWaypointIndex == waypoints.Length - 1)
-        {
-            BeginAttackingShip();
-        }
-        else if (currentWaypointIndex < waypoints.Length - 1)
+        if (currentWaypointIndex < waypoints.Length)
         {
             currentWaypointIndex++;
             MoveToWaypoint();
