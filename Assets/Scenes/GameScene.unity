@@ -314,6 +314,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &906131035 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3212534433061336088, guid: 9e28aac5da561c74782e1fe91d6d5ce0, type: 3}
+  m_PrefabInstance: {fileID: 7841358158920712064}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9370684d5867492984358474bf0ce878, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &967850711
 GameObject:
   m_ObjectHideFlags: 0
@@ -680,14 +691,186 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 657571934127530554, guid: 53a96a48129e53c4b892c0732dd172ac, type: 3}
+      propertyPath: fireTowerPool
+      value: 
+      objectReference: {fileID: 7841358158920712066}
+    - target: {fileID: 657571934127530554, guid: 53a96a48129e53c4b892c0732dd172ac, type: 3}
+      propertyPath: frostTowerPool
+      value: 
+      objectReference: {fileID: 7841358158920712067}
+    - target: {fileID: 675896901016559672, guid: 53a96a48129e53c4b892c0732dd172ac, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 910853760414902873, guid: 53a96a48129e53c4b892c0732dd172ac, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 998177295404530370, guid: 53a96a48129e53c4b892c0732dd172ac, type: 3}
       propertyPath: m_Name
       value: BetterLevel
       objectReference: {fileID: 0}
-    - target: {fileID: 7378720689606075652, guid: 53a96a48129e53c4b892c0732dd172ac, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 91.7
+    - target: {fileID: 1747219104596023453, guid: 53a96a48129e53c4b892c0732dd172ac, type: 3}
+      propertyPath: fireTowerPool
+      value: 
+      objectReference: {fileID: 7841358158920712066}
+    - target: {fileID: 1747219104596023453, guid: 53a96a48129e53c4b892c0732dd172ac, type: 3}
+      propertyPath: frostTowerPool
+      value: 
+      objectReference: {fileID: 7841358158920712067}
+    - target: {fileID: 1764900960262019743, guid: 53a96a48129e53c4b892c0732dd172ac, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2160068148936708860, guid: 53a96a48129e53c4b892c0732dd172ac, type: 3}
+      propertyPath: fireTowerPool
+      value: 
+      objectReference: {fileID: 7841358158920712066}
+    - target: {fileID: 2160068148936708860, guid: 53a96a48129e53c4b892c0732dd172ac, type: 3}
+      propertyPath: frostTowerPool
+      value: 
+      objectReference: {fileID: 7841358158920712067}
+    - target: {fileID: 3189696422722787469, guid: 53a96a48129e53c4b892c0732dd172ac, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3353184070100287749, guid: 53a96a48129e53c4b892c0732dd172ac, type: 3}
+      propertyPath: fireTowerPool
+      value: 
+      objectReference: {fileID: 7841358158920712066}
+    - target: {fileID: 3353184070100287749, guid: 53a96a48129e53c4b892c0732dd172ac, type: 3}
+      propertyPath: frostTowerPool
+      value: 
+      objectReference: {fileID: 7841358158920712067}
+    - target: {fileID: 3439743405447741439, guid: 53a96a48129e53c4b892c0732dd172ac, type: 3}
+      propertyPath: fireTowerPool
+      value: 
+      objectReference: {fileID: 7841358158920712066}
+    - target: {fileID: 3439743405447741439, guid: 53a96a48129e53c4b892c0732dd172ac, type: 3}
+      propertyPath: frostTowerPool
+      value: 
+      objectReference: {fileID: 7841358158920712067}
+    - target: {fileID: 4402842430808793128, guid: 53a96a48129e53c4b892c0732dd172ac, type: 3}
+      propertyPath: fireTowerPool
+      value: 
+      objectReference: {fileID: 7841358158920712066}
+    - target: {fileID: 4402842430808793128, guid: 53a96a48129e53c4b892c0732dd172ac, type: 3}
+      propertyPath: frostTowerPool
+      value: 
+      objectReference: {fileID: 7841358158920712067}
+    - target: {fileID: 4531314214415730522, guid: 53a96a48129e53c4b892c0732dd172ac, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4600142277775096224, guid: 53a96a48129e53c4b892c0732dd172ac, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4625934953494222049, guid: 53a96a48129e53c4b892c0732dd172ac, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4917696410359943648, guid: 53a96a48129e53c4b892c0732dd172ac, type: 3}
+      propertyPath: fireTowerPool
+      value: 
+      objectReference: {fileID: 7841358158920712066}
+    - target: {fileID: 4917696410359943648, guid: 53a96a48129e53c4b892c0732dd172ac, type: 3}
+      propertyPath: frostTowerPool
+      value: 
+      objectReference: {fileID: 7841358158920712067}
+    - target: {fileID: 5116004155054612266, guid: 53a96a48129e53c4b892c0732dd172ac, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5205889809373532587, guid: 53a96a48129e53c4b892c0732dd172ac, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5267687334846922743, guid: 53a96a48129e53c4b892c0732dd172ac, type: 3}
+      propertyPath: fireTowerPool
+      value: 
+      objectReference: {fileID: 7841358158920712066}
+    - target: {fileID: 5267687334846922743, guid: 53a96a48129e53c4b892c0732dd172ac, type: 3}
+      propertyPath: frostTowerPool
+      value: 
+      objectReference: {fileID: 7841358158920712067}
+    - target: {fileID: 5321186981613486822, guid: 53a96a48129e53c4b892c0732dd172ac, type: 3}
+      propertyPath: fireTowerPool
+      value: 
+      objectReference: {fileID: 7841358158920712066}
+    - target: {fileID: 5321186981613486822, guid: 53a96a48129e53c4b892c0732dd172ac, type: 3}
+      propertyPath: frostTowerPool
+      value: 
+      objectReference: {fileID: 7841358158920712067}
+    - target: {fileID: 5430553089222381827, guid: 53a96a48129e53c4b892c0732dd172ac, type: 3}
+      propertyPath: fireTowerPool
+      value: 
+      objectReference: {fileID: 7841358158920712066}
+    - target: {fileID: 5430553089222381827, guid: 53a96a48129e53c4b892c0732dd172ac, type: 3}
+      propertyPath: frostTowerPool
+      value: 
+      objectReference: {fileID: 7841358158920712067}
+    - target: {fileID: 6152252402296564037, guid: 53a96a48129e53c4b892c0732dd172ac, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6314513482010732431, guid: 53a96a48129e53c4b892c0732dd172ac, type: 3}
+      propertyPath: fireTowerPool
+      value: 
+      objectReference: {fileID: 7841358158920712066}
+    - target: {fileID: 6314513482010732431, guid: 53a96a48129e53c4b892c0732dd172ac, type: 3}
+      propertyPath: frostTowerPool
+      value: 
+      objectReference: {fileID: 7841358158920712067}
+    - target: {fileID: 6360366467598649170, guid: 53a96a48129e53c4b892c0732dd172ac, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6378994278954744387, guid: 53a96a48129e53c4b892c0732dd172ac, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6440449906394065166, guid: 53a96a48129e53c4b892c0732dd172ac, type: 3}
+      propertyPath: fireTowerPool
+      value: 
+      objectReference: {fileID: 7841358158920712066}
+    - target: {fileID: 6440449906394065166, guid: 53a96a48129e53c4b892c0732dd172ac, type: 3}
+      propertyPath: frostTowerPool
+      value: 
+      objectReference: {fileID: 7841358158920712067}
+    - target: {fileID: 6486073385248483750, guid: 53a96a48129e53c4b892c0732dd172ac, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7550482095391760448, guid: 53a96a48129e53c4b892c0732dd172ac, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7572116960872917124, guid: 53a96a48129e53c4b892c0732dd172ac, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8668174069525614625, guid: 53a96a48129e53c4b892c0732dd172ac, type: 3}
+      propertyPath: fireTowerPool
+      value: 
+      objectReference: {fileID: 7841358158920712066}
+    - target: {fileID: 8668174069525614625, guid: 53a96a48129e53c4b892c0732dd172ac, type: 3}
+      propertyPath: frostTowerPool
+      value: 
+      objectReference: {fileID: 7841358158920712067}
+    - target: {fileID: 8727735730632934366, guid: 53a96a48129e53c4b892c0732dd172ac, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -10.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 8761376303625279717, guid: 53a96a48129e53c4b892c0732dd172ac, type: 3}
+      propertyPath: fireTowerPool
+      value: 
+      objectReference: {fileID: 7841358158920712066}
+    - target: {fileID: 8761376303625279717, guid: 53a96a48129e53c4b892c0732dd172ac, type: 3}
+      propertyPath: frostTowerPool
+      value: 
+      objectReference: {fileID: 7841358158920712067}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -701,6 +884,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 788038489}
     m_Modifications:
+    - target: {fileID: 1565829187758924809, guid: 9e28aac5da561c74782e1fe91d6d5ce0, type: 3}
+      propertyPath: initialPoolSize
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 2531388182455675347, guid: 9e28aac5da561c74782e1fe91d6d5ce0, type: 3}
       propertyPath: level
       value: 
@@ -747,7 +934,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2531388182455675347, guid: 9e28aac5da561c74782e1fe91d6d5ce0, type: 3}
       propertyPath: waveConfigs.Array.data[0].Wave.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2531388182455675347, guid: 9e28aac5da561c74782e1fe91d6d5ce0, type: 3}
       propertyPath: waveConfigs.Array.data[1].Wave.Array.size
@@ -762,6 +949,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7841358158920712065}
     - target: {fileID: 2531388182455675347, guid: 9e28aac5da561c74782e1fe91d6d5ce0, type: 3}
+      propertyPath: waveConfigs.Array.data[0].Wave.Array.data[1].Pool
+      value: 
+      objectReference: {fileID: 906131035}
+    - target: {fileID: 2531388182455675347, guid: 9e28aac5da561c74782e1fe91d6d5ce0, type: 3}
       propertyPath: waveConfigs.Array.data[1].Wave.Array.data[0].Pool
       value: 
       objectReference: {fileID: 7841358158920712065}
@@ -774,6 +965,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2531388182455675347, guid: 9e28aac5da561c74782e1fe91d6d5ce0, type: 3}
+      propertyPath: waveConfigs.Array.data[0].Wave.Array.data[1].Count
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2531388182455675347, guid: 9e28aac5da561c74782e1fe91d6d5ce0, type: 3}
       propertyPath: waveConfigs.Array.data[1].Wave.Array.data[0].Count
       value: 5
       objectReference: {fileID: 0}
@@ -783,6 +978,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2531388182455675347, guid: 9e28aac5da561c74782e1fe91d6d5ce0, type: 3}
       propertyPath: waveConfigs.Array.data[0].Wave.Array.data[0].SpawnPoint
+      value: 
+      objectReference: {fileID: 267399232}
+    - target: {fileID: 2531388182455675347, guid: 9e28aac5da561c74782e1fe91d6d5ce0, type: 3}
+      propertyPath: waveConfigs.Array.data[0].Wave.Array.data[1].SpawnPoint
       value: 
       objectReference: {fileID: 267399232}
     - target: {fileID: 2531388182455675347, guid: 9e28aac5da561c74782e1fe91d6d5ce0, type: 3}
@@ -837,6 +1036,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8778216315833628936, guid: 9e28aac5da561c74782e1fe91d6d5ce0, type: 3}
+      propertyPath: initialPoolSize
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 8971339473403977683, guid: 9e28aac5da561c74782e1fe91d6d5ce0, type: 3}
       propertyPath: prefab
       value: 
@@ -855,6 +1058,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9370684d5867492984358474bf0ce878, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7841358158920712066 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7543694138966119953, guid: 9e28aac5da561c74782e1fe91d6d5ce0, type: 3}
+  m_PrefabInstance: {fileID: 7841358158920712064}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ac13c99edf7414daca08149eb2ce969, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7841358158920712067 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2292141392650074246, guid: 9e28aac5da561c74782e1fe91d6d5ce0, type: 3}
+  m_PrefabInstance: {fileID: 7841358158920712064}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ac13c99edf7414daca08149eb2ce969, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807

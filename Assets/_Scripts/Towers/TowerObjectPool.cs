@@ -7,10 +7,11 @@ public class TowerObjectPool : ObjectPool<Tower>
     
     public Collider[] HitColliders => hitColliders;
     
-    public Tower Spawn(TowerShotConfig shotConfig)
+    public Tower Spawn(TowerShotConfig shotConfig, Transform spawnPoint)
     {
         var tower = Spawn();
         tower.Spawn(shotConfig, shotPool, hitColliders);
+        tower.Install(spawnPoint);
         return tower;
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Tower : MonoBehaviour
+public class Tower : MonoBehaviour, IPowerUppable
 {
     [SerializeField] private float cooldownSeconds;
     [SerializeField] private LayerMask collisionLayer;
@@ -18,7 +18,7 @@ public class Tower : MonoBehaviour
     private float modifiedRange;
     private float modifiedCooldown;
 
-    public Transform GunTransform => gunTransform;
+    public Transform AttachPoint => gunTransform;
 
     public void Spawn(TowerShotConfig shotConfig, TowerShotObjectPool shotPool, Collider[] reusableColliders)
     {
