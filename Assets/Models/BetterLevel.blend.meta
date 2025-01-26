@@ -3,7 +3,22 @@ guid: 3e08eff58eb99404da48ce4ecebede05
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Grass_Material
+    second: {fileID: 2100000, guid: 5041ad60d991a584aa05286a32fd3f8c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Path_Texture
+    second: {fileID: 2100000, guid: facc76a9c7e709f448fe7d7704d672f8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Water_Texture
+    second: {fileID: 2100000, guid: 5ee1687d933783840bf6cc1a590bbd08, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

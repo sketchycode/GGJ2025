@@ -40,7 +40,7 @@ public class Bubble : MonoBehaviour, IInteractable, IDamageable
 
     private void Update()
     {
-        if (bubbleable.MoveToPlayer)
+        if (player != null)
         {
             var vectorToPlayer = player.transform.position - transform.position;
             if (vectorToPlayer.magnitude > playerFollowDistance)

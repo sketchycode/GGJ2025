@@ -1,12 +1,14 @@
-using System.Collections.Generic;
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
 {
     [Header("Instanced References")]
     [SerializeField] private CinemachineCamera playerCamera;
     [SerializeField] private Transform gameObjectsContainer;
+    [SerializeField] private Transform enemySpawnPoint;
+    [SerializeField] private Level level;
     
     [Header("Prefabs")]
     [SerializeField] private Player playerPrefab;
@@ -14,37 +16,74 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Enemy enemyPrefab;
     [SerializeField] private Ship shipPrefab;
     
-    [SerializeField] private List<Transform> waypoints;
+    [Header("Internal References")]
+    [SerializeField] private TowerObjectPool towerObjectPool;
+    [SerializeField] private TowerShotObjectPool towerShotObjectPool;
+    [SerializeField] private PowerUpObjectPool frostFlowerPowerUpObjectPool;
+    [SerializeField] private EnemyObjectPool gooblinObjectPool;
+    
+    [Header("Debug Stuff")]
+    [SerializeField] private TowerShotConfig shotConfig;
+    [SerializeField] private TowerShotModifier shotModifier;
     
     private Player player;
+    private Ship ship;
+
+    private int numEnemies = 5;
     
     private void Start()
     {
-        // Lock the cursor to the center and hide it
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-        
-        // Spawn the player
-        player = Instantiate(playerPrefab, gameObjectsContainer);
-        playerCamera.Follow = player.FollowTarget;
-        playerCamera.LookAt = player.FollowTarget;
-        
-        var ship = Instantiate(shipPrefab, gameObjectsContainer);
-        ship.transform.position = new Vector3(-5, 0, -5);
-        
-        waypoints.Add(ship.transform);
+        InitializeGameScene();
+        ConfigureObjectPools();
 
-        var enemy = Instantiate(enemyPrefab, gameObjectsContainer);
-        enemy.transform.position = new Vector3(5, 0, 5);
-        enemy.Spawn(waypoints.ToArray(), player, ship);
-        enemy.Died += OnEnemy_Died;
+        TempSetupStuff();
     }
 
-    private void OnEnemy_Died(Enemy obj)
+    private void InitializeGameScene()
     {
-        var powerUp = Instantiate(powerUpPrefab, gameObjectsContainer);
-        powerUp.transform.position = obj.transform.position;
-        powerUp.Spawn(player);
-        powerUp.DropToGround();
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+        SetupPlayer();
+        SetupShip();
+    }
+
+    private void SetupPlayer()
+    {
+        player = Instantiate(playerPrefab, gameObjectsContainer);
+        player.transform.position = level.PlayerSpawnPoint.position;
+        playerCamera.Follow = player.FollowTarget;
+        playerCamera.LookAt = player.FollowTarget;
+    }
+
+    private void SetupShip()
+    {
+        ship = Instantiate(shipPrefab, gameObjectsContainer);
+        ship.transform.position = level.ShipSpawnPoint.position;
+    }
+
+    private void ConfigureObjectPools()
+    {
+        towerObjectPool.OverrideParentTransform = gameObjectsContainer;
+        towerShotObjectPool.OverrideParentTransform = gameObjectsContainer;
+        frostFlowerPowerUpObjectPool.OverrideParentTransform = gameObjectsContainer;
+        gooblinObjectPool.OverrideParentTransform = gameObjectsContainer;
+        
+        frostFlowerPowerUpObjectPool.Player = player;
+        gooblinObjectPool.Ship = ship;
+    }
+    
+    private void TempSetupStuff()
+    {
+        foreach (var spawnPoint in level.SpawnPoints)
+        {
+            for (int i = 0; i < numEnemies; i++)
+            {
+                gooblinObjectPool.Spawn(spawnPoint);
+            }
+        }
+        
+        var tower = towerObjectPool.Spawn(shotConfig);
+        tower.Install(level.InstallPoints[0]);
     }
 }

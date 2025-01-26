@@ -7,7 +7,8 @@ using Random = UnityEngine.Random;
 public class Enemy : MonoBehaviour, IInteractable, IBubbleable, IDamageable
 {
     [Header("Internal References")]
-    [SerializeField] private Collider modelCollider;
+    [SerializeField] private Collider _collider;
+    [SerializeField] private Transform model;
     
     [Header("Movement Settings")]
     [SerializeField] private float waypointTolerance = 0.5f;
@@ -21,31 +22,38 @@ public class Enemy : MonoBehaviour, IInteractable, IBubbleable, IDamageable
     [SerializeField] private float damageToShip = 10f;
     [SerializeField] private float damageToBubble = 20f;
     [SerializeField] private float attackSpeed = 1f;
+    [SerializeField] private TowerShotConfig shotConfig;
+    [SerializeField] private Animator animator;
 
     private NavMeshAgent agent;
     private int currentWaypointIndex = 0;
     private bool isInterrupted = false;
     private Transform[] waypoints;
     private Ship ship;
+    private PowerUpObjectPool powerUpPool;
     private Bubble bubble;
     private int floatUpAnimId = -1;
     private int spinAnimId = -1;
     private Transform originalParent;
-    private Player player;
     private float health;
     private Coroutine attackingCoroutine;
     private Vector3 rotationAxis;
+    
+    private int isRunningAnimId = -1;
+    private int attackAnimId = -1;
 
     public event Action<Enemy> HealthChanged;
-    public event Action<Enemy> Died;
+    
+    public bool IsBubbled => bubble != null;
 
-    public void Spawn(Transform[] waypoints, Player player, Ship ship)
+    public void Spawn(Ship ship, PowerUpObjectPool powerUpPool)
     {
-        this.waypoints = waypoints;
-        this.player = player;
+        this.waypoints = new [] { ship.transform };
         this.ship = ship;
+        this.powerUpPool = powerUpPool;
         
         health = maxHealth;
+        animator.SetBool(isRunningAnimId, true);
     }
     
     private void Awake()
@@ -53,6 +61,9 @@ public class Enemy : MonoBehaviour, IInteractable, IBubbleable, IDamageable
         agent = GetComponent<NavMeshAgent>();
         originalParent = transform.parent;
         StartCoroutine(RotationAxisSelection());
+
+        isRunningAnimId = Animator.StringToHash("isRunning");
+        attackAnimId = Animator.StringToHash("attack");
     }
 
     private IEnumerator RotationAxisSelection()
@@ -78,7 +89,7 @@ public class Enemy : MonoBehaviour, IInteractable, IBubbleable, IDamageable
 
     private void Update()
     {
-        if (bubble != null) modelCollider.transform.Rotate(rotationAxis, 60 * Time.deltaTime);
+        if (bubble != null) model.transform.Rotate(rotationAxis, 60 * Time.deltaTime);
         
         // If interrupted, don't process movement
         if (isInterrupted) return;
@@ -93,7 +104,7 @@ public class Enemy : MonoBehaviour, IInteractable, IBubbleable, IDamageable
 
     private void MoveToWaypoint()
     {
-        if (currentWaypointIndex == waypoints.Length - 1)
+        if (currentWaypointIndex == waypoints.Length)
         {
             BeginAttackingShip();
         }
@@ -105,11 +116,7 @@ public class Enemy : MonoBehaviour, IInteractable, IBubbleable, IDamageable
 
     private void MoveToNextWaypoint()
     {
-        if (currentWaypointIndex == waypoints.Length - 1)
-        {
-            BeginAttackingShip();
-        }
-        else if (currentWaypointIndex < waypoints.Length - 1)
+        if (currentWaypointIndex < waypoints.Length)
         {
             currentWaypointIndex++;
             MoveToWaypoint();
@@ -121,16 +128,18 @@ public class Enemy : MonoBehaviour, IInteractable, IBubbleable, IDamageable
         isInterrupted = true;
         agent.isStopped = true;
         agent.enabled = false;
-        modelCollider.enabled = false;
+        
+        animator.SetBool(isRunningAnimId, false);
     }
 
     public void Resume()
     {
         isInterrupted = false;
-        modelCollider.enabled = true;
         agent.enabled = true;
         agent.isStopped = false;
         MoveToWaypoint();
+        
+        animator.SetBool(isRunningAnimId, true);
     }
 
     private void BeginAttackingShip()
@@ -147,8 +156,11 @@ public class Enemy : MonoBehaviour, IInteractable, IBubbleable, IDamageable
 
     private IEnumerator Attack(IDamageable damageable, float damage)
     {
+        animator.SetBool(isRunningAnimId, false);
         while (true)
         {
+            animator.SetTrigger(attackAnimId);
+            animator.SetTrigger(attackAnimId);
             damageable.TakeDamage(damage);
             yield return new WaitForSeconds(attackSpeed);
         }
@@ -190,7 +202,7 @@ public class Enemy : MonoBehaviour, IInteractable, IBubbleable, IDamageable
                 .move(gameObject, targetPosition, 0.5f).setEaseInExpo()
                 .setOnComplete(() => Resume())
                 .id;
-            spinAnimId = LeanTween.rotateLocal(modelCollider.gameObject, Vector3.zero, 0.2f).id;
+            spinAnimId = LeanTween.rotateLocal(model.gameObject, Vector3.zero, 0.2f).id;
         }
         else
         {
@@ -203,7 +215,8 @@ public class Enemy : MonoBehaviour, IInteractable, IBubbleable, IDamageable
     {
         Destroy(gameObject);
         if (bubble != null) bubble.TakeDamage(bubble.Health);
-        Died?.Invoke(this);
+
+        powerUpPool.Spawn(transform);
     }
 
     #region IInteractable
@@ -211,8 +224,8 @@ public class Enemy : MonoBehaviour, IInteractable, IBubbleable, IDamageable
     
     public void Interact()
     {
-        var bubble = Instantiate(bubblePrefab, modelCollider.transform.position, Quaternion.identity);
-        bubble.Spawn(this, player);
+        var bubble = Instantiate(bubblePrefab, _collider.transform.position, Quaternion.identity);
+        bubble.Spawn(this, null);
     }
     #endregion IInteractable
 
@@ -221,7 +234,7 @@ public class Enemy : MonoBehaviour, IInteractable, IBubbleable, IDamageable
     
     public void Bubble(Bubble bubble)
     {
-        // interrupt and float up into bubble, begin attack bubble
+        Debug.Log("Enemy bubbled");
         this.bubble = bubble;
         Interrupt();
         
@@ -232,6 +245,7 @@ public class Enemy : MonoBehaviour, IInteractable, IBubbleable, IDamageable
 
     public void PopBubble()
     {
+        Debug.Log("Enemy bubble popped");
         CancelAttack();
         bubble = null;
         
@@ -243,7 +257,7 @@ public class Enemy : MonoBehaviour, IInteractable, IBubbleable, IDamageable
 
     public Vector3 GetBubbleWorldPosition()
     {
-        return modelCollider.transform.position;
+        return _collider.transform.position;
     }
 
     public void TakeDamage(float damage)

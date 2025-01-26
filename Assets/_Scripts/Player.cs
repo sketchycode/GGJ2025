@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     
     [Header("Internal References")]
     [SerializeField] private Transform followTarget;
+    [SerializeField] private Animator animator;
     
     [Header("Interaction Settings")]
     [SerializeField] private Bubble bubblePrefab; // Bubble prefab to instantiate
@@ -81,20 +82,24 @@ public class Player : MonoBehaviour
         HandleMouseLook();
         HandleMovement();
         
+        animator.SetBool("isGrounded", controller.isGrounded);
+        animator.SetFloat("horizontalSpeed", controller.velocity.ToXZ().sqrMagnitude);
+        
         GetClosestInteractable();
     }
 
     private void HandleMovement()
     {
         Vector3 move = transform.right * moveInputValue.x + transform.forward * moveInputValue.y;
-        controller.Move(move * (moveSpeed * Time.deltaTime));
 
         if (controller.isGrounded && velocity.y < 0)
         {
-            velocity.y = 0f;
+            velocity.y = gravity;
         }
         velocity.y += gravity * Time.deltaTime;
-        controller.Move(velocity * Time.deltaTime);
+        move *= moveSpeed;
+        move.y = velocity.y;
+        controller.Move(move * Time.deltaTime);
     }
     
     private void HandleMouseLook()
