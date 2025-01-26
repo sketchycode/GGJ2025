@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -92,6 +93,7 @@ public class GameManager : MonoBehaviour
         ship = Instantiate(shipPrefab, gameObjectsContainer);
         ship.Spawn();
         ship.transform.position = level.ShipSpawnPoint.position;
+        ship.transform.rotation = level.ShipSpawnPoint.rotation;
         ship.Died += OnShip_Died;
     }
 
@@ -110,7 +112,9 @@ public class GameManager : MonoBehaviour
         firePowerUpObjectPool.Player = player;
         
         gooblinObjectPool.Ship = ship;
+        gooblinObjectPool.EndGoal = level.EndGoalPoint;
         crabObjectPool.Ship = ship;
+        crabObjectPool.EndGoal = level.EndGoalPoint;
     }
     
     private IEnumerator StartWave(EnemyWaveConfig config, float delay)
@@ -146,12 +150,12 @@ public class GameManager : MonoBehaviour
 
     private void HandleWinGame()
     {
-        Debug.Log("Win Game");
+        SceneManager.LoadScene(2);
     }
 
     private void HandleLoseGame()
     {
-        Debug.Log("Lose Game");
+        SceneManager.LoadScene(3);
     }
 
     private void OnEnemy_Died(Enemy obj)

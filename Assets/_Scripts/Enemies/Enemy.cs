@@ -47,9 +47,9 @@ public class Enemy : MonoBehaviour, IInteractable, IBubbleable, IDamageable
     
     public bool IsBubbled => bubble != null;
 
-    public void Spawn(Ship ship, PowerUpObjectPool powerUpPool)
+    public void Spawn(Ship ship, Transform endGoal, PowerUpObjectPool powerUpPool)
     {
-        this.waypoints = new [] { ship.transform };
+        waypoints = new [] { endGoal };
         this.ship = ship;
         this.powerUpPool = powerUpPool;
         
