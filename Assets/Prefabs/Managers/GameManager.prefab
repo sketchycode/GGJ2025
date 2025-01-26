@@ -31,8 +31,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2590318105261089945}
+  - {fileID: 6328049126898069257}
   - {fileID: 8579754084792334363}
+  - {fileID: 3780944395617624499}
+  - {fileID: 4482476053875617713}
   m_Father: {fileID: 5637034355029330649}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8971339473403977683
@@ -64,7 +66,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 4384221500905550291, guid: d9ca2b58e9318c24dad3b2d7c573ca78, type: 3}
   initialPoolSize: 100
---- !u!1 &935754828329917383
+--- !u!1 &23210887214734932
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -72,22 +74,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2590318105261089945}
-  - component: {fileID: 3203129471315721051}
+  - component: {fileID: 6328049126898069257}
+  - component: {fileID: 3262803773171718314}
   m_Layer: 0
-  m_Name: Gooblin
+  m_Name: FirePowerUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2590318105261089945
+--- !u!4 &6328049126898069257
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 935754828329917383}
+  m_GameObject: {fileID: 23210887214734932}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -96,21 +98,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 641752843599096569}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3203129471315721051
+--- !u!114 &3262803773171718314
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 935754828329917383}
+  m_GameObject: {fileID: 23210887214734932}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9370684d5867492984358474bf0ce878, type: 3}
+  m_Script: {fileID: 11500000, guid: b28b943b10024890bcd939dcd3b1a286, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 3558296868853722477, guid: a2d0bcc0866593d4db86f229b6b41e8d, type: 3}
-  initialPoolSize: 20
-  powerUpObjectPool: {fileID: 5580469545700384871}
+  prefab: {fileID: 800949613826608083, guid: 7aa3d4ce9eeede64cb7579092c645979, type: 3}
+  initialPoolSize: 10
 --- !u!1 &1853182172686757027
 GameObject:
   m_ObjectHideFlags: 0
@@ -122,7 +123,7 @@ GameObject:
   - component: {fileID: 8579754084792334363}
   - component: {fileID: 5580469545700384871}
   m_Layer: 0
-  m_Name: FrostFlower
+  m_Name: FrostPowerUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -157,6 +158,53 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 7953251870693459485, guid: fd731064503074a4eae8984cb44d3d4a, type: 3}
   initialPoolSize: 20
+--- !u!1 &2946852969865893334
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3780944395617624499}
+  - component: {fileID: 1565829187758924809}
+  m_Layer: 0
+  m_Name: Gooblin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3780944395617624499
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2946852969865893334}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 641752843599096569}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1565829187758924809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2946852969865893334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9370684d5867492984358474bf0ce878, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 3558296868853722477, guid: a2d0bcc0866593d4db86f229b6b41e8d, type: 3}
+  initialPoolSize: 10
+  powerUpObjectPool: {fileID: 3262803773171718314}
 --- !u!1 &3870585637079440520
 GameObject:
   m_ObjectHideFlags: 0
@@ -212,7 +260,58 @@ MonoBehaviour:
   shipPrefab: {fileID: 136643507273545621, guid: 423ca645002be2d4a8e48f1b6e2333ec, type: 3}
   towerObjectPool: {fileID: 8971339473403977683}
   towerShotObjectPool: {fileID: 4805458520605745486}
-  frostFlowerPowerUpObjectPool: {fileID: 5580469545700384871}
-  gooblinObjectPool: {fileID: 3203129471315721051}
+  frostPowerUpObjectPool: {fileID: 5580469545700384871}
+  firePowerUpObjectPool: {fileID: 3262803773171718314}
+  gooblinObjectPool: {fileID: 1565829187758924809}
+  crabObjectPool: {fileID: 3212534433061336088}
+  waveConfigs: []
+  timeBetweenWaves: 30
   shotConfig: {fileID: 11400000, guid: 524441a2b69127846b1c3b0c26a525b7, type: 2}
   shotModifier: {fileID: 11400000, guid: c9b09f59369725d42898a62427510bd8, type: 2}
+--- !u!1 &7546982398831990473
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4482476053875617713}
+  - component: {fileID: 3212534433061336088}
+  m_Layer: 0
+  m_Name: Crab
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4482476053875617713
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7546982398831990473}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 641752843599096569}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3212534433061336088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7546982398831990473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9370684d5867492984358474bf0ce878, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 4983394155250385830, guid: 10d0a55e201bb9b42a894a9dde2909b6, type: 3}
+  initialPoolSize: 10
+  powerUpObjectPool: {fileID: 5580469545700384871}
