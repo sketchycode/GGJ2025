@@ -147,8 +147,8 @@ public class Player : MonoBehaviour
             var hitCollider = hitColliders[i];
             Vector3 directionToObject = (hitCollider.transform.position - followTarget.position).normalized;
 
-            float angle = Vector3.Angle(followTarget.forward, directionToObject);
-            if (angle <= 30f) // 30 degrees to either side = 60 degrees total arc
+            float angle = Vector3.Angle(transform.forward, directionToObject);
+            if (angle <= 45f) // either side of the forward vector
             {
                 float distance = Vector3.Distance(followTarget.position, hitCollider.transform.position);
                 IInteractable interactable = hitCollider.GetComponentInParent<IInteractable>();

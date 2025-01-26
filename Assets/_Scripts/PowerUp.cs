@@ -57,7 +57,7 @@ public class PowerUp : MonoBehaviour, IInteractable, IBubbleable
         floatUpAnimId = LeanTween.moveLocal(gameObject, Vector3.zero, 0.5f).id;
     }
 
-    private void DropToGround()
+    public void DropToGround()
     {
         LeanTween.cancel(gameObject, floatUpAnimId);
         LeanTween.cancel(gameObject, spinAnimId);
@@ -108,7 +108,13 @@ public class PowerUp : MonoBehaviour, IInteractable, IBubbleable
     
     Vector3 IBubbleable.GetBubbleWorldPosition()
     {
-        return transform.position;
+        return modelCollider.transform.position;
     }
+
+    public void TakeDamage(float damage)
+    {
+        // do nothing
+    }
+
     #endregion IBubbleable
 }
