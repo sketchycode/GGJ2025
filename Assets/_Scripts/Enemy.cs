@@ -119,13 +119,11 @@ public class Enemy : MonoBehaviour, IInteractable, IBubbleable, IDamageable
         isInterrupted = true;
         agent.isStopped = true;
         agent.enabled = false;
-        modelCollider.enabled = false;
     }
 
     public void Resume()
     {
         isInterrupted = false;
-        modelCollider.enabled = true;
         agent.enabled = true;
         agent.isStopped = false;
         MoveToWaypoint();
@@ -219,7 +217,7 @@ public class Enemy : MonoBehaviour, IInteractable, IBubbleable, IDamageable
     
     public void Bubble(Bubble bubble)
     {
-        // interrupt and float up into bubble, begin attack bubble
+        Debug.Log("Enemy bubbled");
         this.bubble = bubble;
         Interrupt();
         
@@ -230,6 +228,7 @@ public class Enemy : MonoBehaviour, IInteractable, IBubbleable, IDamageable
 
     public void PopBubble()
     {
+        Debug.Log("Enemy bubble popped");
         CancelAttack();
         bubble = null;
         

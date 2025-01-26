@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Unity.Cinemachine;
 using UnityEngine;
 
@@ -19,9 +18,11 @@ public class GameManager : MonoBehaviour
     [Header("Internal References")]
     [SerializeField] private TowerObjectPool towerObjectPool;
     [SerializeField] private TowerShotObjectPool towerShotObjectPool;
+    [SerializeField] private PowerUpObjectPool powerUpObjectPool;
     
     [Header("Debug Stuff")]
     [SerializeField] private TowerShotConfig shotConfig;
+    [SerializeField] private TowerShotModifier shotModifier;
     
     private Player player;
 
@@ -35,12 +36,15 @@ public class GameManager : MonoBehaviour
         
         towerObjectPool.OverrideParentTransform = gameObjectsContainer;
         towerShotObjectPool.OverrideParentTransform = gameObjectsContainer;
+        powerUpObjectPool.OverrideParentTransform = gameObjectsContainer;
         
         // Spawn the player
         player = Instantiate(playerPrefab, gameObjectsContainer);
         player.transform.position = level.PlayerSpawnPoint.position;
         playerCamera.Follow = player.FollowTarget;
         playerCamera.LookAt = player.FollowTarget;
+        
+        powerUpObjectPool.Player = player;
         
         var ship = Instantiate(shipPrefab, gameObjectsContainer);
         ship.transform.position = level.ShipSpawnPoint.position;
@@ -62,9 +66,6 @@ public class GameManager : MonoBehaviour
 
     private void OnEnemy_Died(Enemy obj)
     {
-        var powerUp = Instantiate(powerUpPrefab, gameObjectsContainer);
-        powerUp.transform.position = obj.transform.position;
-        powerUp.Spawn(player);
-        powerUp.DropToGround();
+        var powerUp = powerUpObjectPool.Spawn(obj.transform);
     }
 }

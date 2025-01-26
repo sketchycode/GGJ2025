@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 641752843599096569}
   - component: {fileID: 8971339473403977683}
   - component: {fileID: 4805458520605745486}
+  - component: {fileID: 7006227665158048583}
   m_Layer: 0
   m_Name: ObjectPools
   m_TagString: Untagged
@@ -62,6 +63,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 4384221500905550291, guid: d9ca2b58e9318c24dad3b2d7c573ca78, type: 3}
   initialPoolSize: 100
+--- !u!114 &7006227665158048583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 18635953764889393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b28b943b10024890bcd939dcd3b1a286, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 2084687650973897504, guid: ddb4023442f250949928589eb676a1cf, type: 3}
+  initialPoolSize: 10
+  firePowerUpModifier: {fileID: 11400000, guid: b657586643d6b6143812662f3fd0eb32, type: 2}
 --- !u!1 &3870585637079440520
 GameObject:
   m_ObjectHideFlags: 0
@@ -117,4 +133,6 @@ MonoBehaviour:
   shipPrefab: {fileID: 136643507273545621, guid: 423ca645002be2d4a8e48f1b6e2333ec, type: 3}
   towerObjectPool: {fileID: 8971339473403977683}
   towerShotObjectPool: {fileID: 4805458520605745486}
+  powerUpObjectPool: {fileID: 7006227665158048583}
   shotConfig: {fileID: 11400000, guid: 524441a2b69127846b1c3b0c26a525b7, type: 2}
+  shotModifier: {fileID: 11400000, guid: c9b09f59369725d42898a62427510bd8, type: 2}

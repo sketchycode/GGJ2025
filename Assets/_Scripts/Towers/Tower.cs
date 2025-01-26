@@ -1,4 +1,6 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Tower : MonoBehaviour
@@ -11,58 +13,80 @@ public class Tower : MonoBehaviour
     private TowerShotConfig shotConfig;
     private Collider[] hitColliders;
     private Enemy currentTarget;
+    private readonly List<TowerShotModifier> modifiers = new();
+
+    private float modifiedRange;
+    private float modifiedCooldown;
+
+    public Transform GunTransform => gunTransform;
 
     public void Spawn(TowerShotConfig shotConfig, TowerShotObjectPool shotPool, Collider[] reusableColliders)
     {
         this.shotConfig = shotConfig;
         this.shotPool = shotPool;
         hitColliders = reusableColliders;
+        
+        modifiedRange = shotConfig.Radius;
+        modifiedCooldown = cooldownSeconds;
     }
 
     public void Install(Transform installPoint)
     {
-        transform.position = installPoint.position - (Vector3.up * 10);
+        transform.position = installPoint.position - (Vector3.up * 15);
         LeanTween
-            .move(gameObject, installPoint.position, 1f)
+            .move(gameObject, installPoint.position, 4f)
             .setEase(LeanTweenType.easeOutExpo)
             .setOnComplete(_ => StartCoroutine(BeginShooting()));
+    }
+
+    public void CollectPowerUp(PowerUp powerUp)
+    {
+        powerUp.DragToTower(this, () => ApplyPowerUp(powerUp));
+    }
+
+    private void ApplyPowerUp(PowerUp powerUp)
+    {
+        modifiers.Add(powerUp.Modifier);
+        
+        modifiedRange = shotConfig.Radius * modifiers.Aggregate(1f, (acc, modifier) => acc * modifier.RangeModifier);
+        modifiedCooldown = cooldownSeconds + modifiers.Aggregate(1f, (acc, modifier) => acc * modifier.CooldownModifier);
     }
 
     private IEnumerator BeginShooting()
     {
         while (true)
         {
+            CheckForEnemiesInRange();
             if (currentTarget == null)
             {
-                CheckForEnemiesInRange();
                 yield return null;
             }
             else
             {
                 FireAtEnemy();
-                yield return new WaitForSeconds(cooldownSeconds);
+                yield return new WaitForSeconds(modifiedCooldown);
             }
         }
     }
 
     private void CheckForEnemiesInRange()
     {
-        Debug.Log($"searching for enemies in range of {shotConfig.Radius}");
         var minDistance = float.MaxValue;
-        var foundBubbled = false;
-        currentTarget = null;
+        var hadTarget = currentTarget != null;
+        var foundBubbled = currentTarget?.IsBubbled ?? false;
         
-        var hitCount = Physics.OverlapSphereNonAlloc(transform.position, shotConfig.Radius, hitColliders, collisionLayer);
+        if (hadTarget && foundBubbled) return;
+        
+        var hitCount = Physics.OverlapSphereNonAlloc(transform.position, modifiedRange, hitColliders, collisionLayer);
 
         for (int i = 0; i < hitCount && i < hitColliders.Length; i++)
         {
             var hitCollider = hitColliders[i];
 
             var enemy = hitCollider.GetComponentInParent<Enemy>();
-            if (enemy == null) continue;
             if (foundBubbled && !enemy.IsBubbled) continue;
             
-            var distance = (hitCollider.transform.position - transform.position).sqrMagnitude;
+            var distance= (hitCollider.transform.position - transform.position).sqrMagnitude;
 
             if (!foundBubbled && enemy.IsBubbled)
             {
@@ -72,7 +96,7 @@ public class Tower : MonoBehaviour
                 continue;
             }
             
-            if (distance < minDistance)
+            if (distance < minDistance && !hadTarget)
             {
                 minDistance = distance;
                 currentTarget = enemy;
@@ -86,13 +110,11 @@ public class Tower : MonoBehaviour
 
         if ((currentTarget.transform.position - transform.position).sqrMagnitude > shotConfig.Radius * shotConfig.Radius)
         {
-            Debug.Log("target out of range");
             currentTarget = null;
             return;
         }
 
-        Debug.Log($"firing at enemy at {currentTarget.transform.position}");
-        var shot = shotPool.Spawn(shotConfig);
+        var shot = shotPool.Spawn(shotConfig, modifiers);
         shot.transform.position = gunTransform.position;
         shot.Target(currentTarget.transform.position);
     }
