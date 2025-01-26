@@ -16,15 +16,25 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Enemy enemyPrefab;
     [SerializeField] private Ship shipPrefab;
     
+    [Header("Internal References")]
+    [SerializeField] private TowerObjectPool towerObjectPool;
+    [SerializeField] private TowerShotObjectPool towerShotObjectPool;
+    
+    [Header("Debug Stuff")]
+    [SerializeField] private TowerShotConfig shotConfig;
+    
     private Player player;
 
-    private int numEnemies = 10;
+    private int numEnemies = 5;
     
     private void Start()
     {
         // Lock the cursor to the center and hide it
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        
+        towerObjectPool.OverrideParentTransform = gameObjectsContainer;
+        towerShotObjectPool.OverrideParentTransform = gameObjectsContainer;
         
         // Spawn the player
         player = Instantiate(playerPrefab, gameObjectsContainer);
@@ -45,6 +55,9 @@ public class GameManager : MonoBehaviour
                 enemy.Died += OnEnemy_Died;
             }
         }
+
+        var tower = towerObjectPool.Spawn(shotConfig);
+        tower.Install(level.InstallPoints[0]);
     }
 
     private void OnEnemy_Died(Enemy obj)

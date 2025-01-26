@@ -31,6 +31,38 @@ Transform:
   m_Children: []
   m_Father: {fileID: 473419310124114040}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4625934953494222049
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4624159776742467202}
+  m_Layer: 12
+  m_Name: TowerInstallNodes
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4624159776742467202
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4625934953494222049}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5946744844892554035}
+  m_Father: {fileID: 473419310124114040}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5038253969260432058
 GameObject:
   m_ObjectHideFlags: 0
@@ -92,6 +124,37 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 473419310124114040}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5988208187923938211
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5946744844892554035}
+  m_Layer: 12
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5946744844892554035
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5988208187923938211}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 28.69}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4624159776742467202}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6113251740697927572
 GameObject:
@@ -241,6 +304,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3e08eff58eb99404da48ce4ecebede05, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3716063343124786980}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3e08eff58eb99404da48ce4ecebede05, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4624159776742467202}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3e08eff58eb99404da48ce4ecebede05, type: 3}
       insertIndex: -1
@@ -286,6 +352,8 @@ MonoBehaviour:
   - {fileID: 7378720689606075652}
   _playerSpawnPoint: {fileID: 3716063343124786980}
   _shipSpawnPoint: {fileID: 3152427202952584099}
+  installPoints:
+  - {fileID: 5946744844892554035}
 --- !u!1 &2162631997444226746 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -6982721888528025303, guid: 3e08eff58eb99404da48ce4ecebede05, type: 3}

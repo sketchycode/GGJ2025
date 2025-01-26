@@ -38,6 +38,8 @@ public class Enemy : MonoBehaviour, IInteractable, IBubbleable, IDamageable
 
     public event Action<Enemy> HealthChanged;
     public event Action<Enemy> Died;
+    
+    public bool IsBubbled => bubble != null;
 
     public void Spawn(Transform[] waypoints, Player player, Ship ship)
     {
