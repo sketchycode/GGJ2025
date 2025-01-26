@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: FrostTowerShotConfig
   m_EditorClassIdentifier: 
   Damage: 3
-  Speed: 1
-  Radius: 8
+  Speed: 5
+  Radius: 15

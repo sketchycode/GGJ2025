@@ -13,7 +13,7 @@ public class TowerShot : MonoBehaviour
 
     public void SpawnInit(TowerShotConfig config, Collider[] reusableColliders, TowerShotObjectPool shotPool, IReadOnlyList<TowerShotModifier> modifiers)
     {
-        this.config = ScriptableObject.Instantiate(config);
+        this.config = Instantiate(config);
         hitColliders = reusableColliders;
         this.shotPool = shotPool;
         this.modifiers = modifiers;

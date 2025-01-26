@@ -91,8 +91,8 @@ MonoBehaviour:
     m_Bits: 10240
   moveSpeed: 5
   gravity: -9.81
-  mouseSensitivityHorizontal: 20
-  mouseSensitivityVertical: 15
+  mouseSensitivityHorizontal: 10
+  mouseSensitivityVertical: 10
   minVerticalLookAngle: -20
   maxVerticalLookAngle: 40
 --- !u!143 &4286131408860536058

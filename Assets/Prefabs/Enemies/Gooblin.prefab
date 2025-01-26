@@ -60,6 +60,10 @@ PrefabInstance:
       propertyPath: animator
       value: 
       objectReference: {fileID: 7080120618636585830}
+    - target: {fileID: 7253698132920331944, guid: 00ac4a711d5a44a44afe56702d66d72e, type: 3}
+      propertyPath: deathClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 8a81ab7aa2b85354ab4c50da53f649d7, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

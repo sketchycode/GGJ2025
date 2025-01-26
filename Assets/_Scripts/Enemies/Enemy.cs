@@ -24,6 +24,8 @@ public class Enemy : MonoBehaviour, IInteractable, IBubbleable, IDamageable
     [SerializeField] private float attackSpeed = 1f;
     [SerializeField] private TowerShotConfig shotConfig;
     [SerializeField] private Animator animator;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip deathClip;
 
     private NavMeshAgent agent;
     private int currentWaypointIndex = 0;
@@ -31,6 +33,7 @@ public class Enemy : MonoBehaviour, IInteractable, IBubbleable, IDamageable
     private Transform[] waypoints;
     private Ship ship;
     private PowerUpObjectPool powerUpPool;
+    private EnemyObjectPool enemyPool;
     private Bubble bubble;
     private int floatUpAnimId = -1;
     private int spinAnimId = -1;
@@ -47,11 +50,12 @@ public class Enemy : MonoBehaviour, IInteractable, IBubbleable, IDamageable
     
     public bool IsBubbled => bubble != null;
 
-    public void Spawn(Ship ship, Transform endGoal, PowerUpObjectPool powerUpPool)
+    public void Spawn(Ship ship, Transform endGoal, PowerUpObjectPool powerUpPool, EnemyObjectPool enemyPool)
     {
         waypoints = new [] { endGoal };
         this.ship = ship;
         this.powerUpPool = powerUpPool;
+        this.enemyPool = enemyPool;
         
         health = maxHealth;
         animator.SetBool(isRunningAnimId, true);
@@ -214,7 +218,8 @@ public class Enemy : MonoBehaviour, IInteractable, IBubbleable, IDamageable
 
     private void Die()
     {
-        Destroy(gameObject);
+        audioSource.PlayOneShot(deathClip);
+        enemyPool.Despawn(this);
         if (bubble != null) bubble.TakeDamage(bubble.Health);
 
         powerUpPool.Spawn(transform);

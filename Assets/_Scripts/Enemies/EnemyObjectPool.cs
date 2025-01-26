@@ -10,7 +10,7 @@ public class EnemyObjectPool : ObjectPool<Enemy>
     public Enemy Spawn(Transform spawnPoint)
     {
         var enemy = Spawn();
-        enemy.Spawn(Ship, EndGoal, powerUpObjectPool);
+        enemy.Spawn(Ship, EndGoal, powerUpObjectPool, this);
         enemy.transform.position = spawnPoint.position;
         return enemy;
     }

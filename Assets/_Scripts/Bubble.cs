@@ -12,6 +12,8 @@ public class Bubble : MonoBehaviour, IInteractable, IDamageable
     [SerializeField] private float maxHealth = 100f;
     [SerializeField] private float playerFollowDistance = 4f;
     [SerializeField] private float damagePerSecond = 10f;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip popBubbleClip;
     
     private CharacterController controller;
     private IBubbleable bubbleable;
@@ -55,6 +57,7 @@ public class Bubble : MonoBehaviour, IInteractable, IDamageable
     {
         model.GetComponent<Collider>().enabled = false;
         bubbleable.PopBubble();
+        audioSource.PlayOneShot(popBubbleClip);
         Destroy(gameObject);
     }
 
