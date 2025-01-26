@@ -70,7 +70,7 @@ public class PowerUp : MonoBehaviour, IInteractable, IBubbleable
         floatUpAnimId = LeanTween.moveLocal(gameObject, Vector3.zero, 0.5f).id;
     }
 
-    public void DropToGround(bool notifyTower = true)
+    public void DropToGround(bool notifyPowerUppable = true)
     {
         LeanTween.cancel(gameObject, floatUpAnimId);
         LeanTween.cancel(gameObject, spinAnimId);
@@ -83,7 +83,7 @@ public class PowerUp : MonoBehaviour, IInteractable, IBubbleable
             floatUpAnimId = LeanTween
                 .move(gameObject, targetPosition, 0.5f)
                 .setEaseInExpo()
-                .setOnComplete(_ => { if (notifyTower) NotifyTower(); })
+                .setOnComplete(_ => { if (notifyPowerUppable) NotifyPowerUppable(); })
                 .id;
             spinAnimId = LeanTween.rotateLocal(model.gameObject, Vector3.zero, 0.2f).id;
         }
@@ -93,7 +93,7 @@ public class PowerUp : MonoBehaviour, IInteractable, IBubbleable
         }
     }
 
-    public void DragToTower(Tower tower, Action onDragComplete)
+    public void DragToTower(IPowerUppable tower, Action onDragComplete)
     {
         LeanTween.cancel(gameObject, floatUpAnimId);
         LeanTween.cancel(gameObject, spinAnimId);
@@ -101,7 +101,7 @@ public class PowerUp : MonoBehaviour, IInteractable, IBubbleable
         spinAnimId = -1;
 
         LeanTween
-            .move(gameObject, tower.GunTransform, 1.2f)
+            .move(gameObject, tower.AttachPoint, 1.2f)
             .setOnComplete(_ =>
             {
                 onDragComplete?.Invoke();
@@ -109,9 +109,9 @@ public class PowerUp : MonoBehaviour, IInteractable, IBubbleable
             });
     }
 
-    private Tower GetNearestTower()
+    private IPowerUppable GetNearestPowerUppable()
     {
-        Tower foundTower = null;
+        IPowerUppable foundTower = null;
         var minDistance = float.MaxValue;
         var hitCount = Physics.OverlapSphereNonAlloc(transform.position, towerDetectionRadius, hitColliders, towerLayer);
         
@@ -119,7 +119,7 @@ public class PowerUp : MonoBehaviour, IInteractable, IBubbleable
         {
             var hitCollider = hitColliders[i];
 
-            var tower = hitCollider.GetComponentInParent<Tower>();
+            var tower = hitCollider.GetComponentInParent<IPowerUppable>();
             
             var distance= (hitCollider.transform.position - transform.position).sqrMagnitude;
             
@@ -132,12 +132,12 @@ public class PowerUp : MonoBehaviour, IInteractable, IBubbleable
         return foundTower;
     }
 
-    private void NotifyTower()
+    private void NotifyPowerUppable()
     {
-        var tower = GetNearestTower();
-        if (tower == null) return;
+        var powerUppable = GetNearestPowerUppable();
+        if (powerUppable == null) return;
 
-        tower.CollectPowerUp(this);
+        powerUppable.CollectPowerUp(this);
     }
 
     #region IInteractable
