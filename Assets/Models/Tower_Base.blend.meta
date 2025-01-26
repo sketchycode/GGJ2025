@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: cfb02bda3b675a6449159066dd9898d3
+guid: 8392ae8b6aefc1b4781a9fa03747ff31
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,8 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Bubble_Material
-    second: {fileID: 2100000, guid: c1ce79374eb76d341b98b4ab04fa9ca8, type: 2}
+      name: Turret_Material
+    second: {fileID: 2100000, guid: a84c81dd7d3b5d7439c08f1d509d3935, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
