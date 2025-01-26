@@ -83,7 +83,7 @@ public class Player : MonoBehaviour
         HandleMovement();
         
         animator.SetBool("isGrounded", controller.isGrounded);
-        //animator.SetFloat("horizontalSpeed", controller.velocity.ToXZ().sqrMagnitude);
+        animator.SetFloat("horizontalSpeed", controller.velocity.ToXZ().sqrMagnitude);
         
         GetClosestInteractable();
     }
@@ -91,14 +91,15 @@ public class Player : MonoBehaviour
     private void HandleMovement()
     {
         Vector3 move = transform.right * moveInputValue.x + transform.forward * moveInputValue.y;
-        controller.Move(move * (moveSpeed * Time.deltaTime));
 
         if (controller.isGrounded && velocity.y < 0)
         {
-            velocity.y = 0f;
+            velocity.y = gravity;
         }
         velocity.y += gravity * Time.deltaTime;
-        controller.Move(velocity * Time.deltaTime);
+        move *= moveSpeed;
+        move.y = velocity.y;
+        controller.Move(move * Time.deltaTime);
     }
     
     private void HandleMouseLook()
