@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 54178fea37ee81544899c27bc779df8e
+guid: 289a377826e5b5243885e6362da83c0a
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -35,7 +35,7 @@ ModelImporter:
       takeName: Scene
       internalID: -623603649343465320
       firstFrame: 1
-      lastFrame: 59
+      lastFrame: 39
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -63,8 +63,8 @@ ModelImporter:
       name: Run
       takeName: Scene
       internalID: -1609281748187839663
-      firstFrame: 61
-      lastFrame: 83
+      firstFrame: 41
+      lastFrame: 77
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -92,8 +92,8 @@ ModelImporter:
       name: Attack
       takeName: Scene
       internalID: 723096430288179899
-      firstFrame: 84
-      lastFrame: 106
+      firstFrame: 78
+      lastFrame: 96
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
