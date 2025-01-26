@@ -83,11 +83,12 @@ MonoBehaviour:
   lookInput: {fileID: 4593678513171534074, guid: 328af35925a824044822b340100995c5, type: 3}
   interactInput: {fileID: -6812486663553711104, guid: 328af35925a824044822b340100995c5, type: 3}
   followTarget: {fileID: 661044304646825400}
+  animator: {fileID: 684333045791461614}
   bubblePrefab: {fileID: 2674325371147267787, guid: 73c556afe95387a4abcb30fed86afd9a, type: 3}
   interactRange: 3
   interactionLayer:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 10240
   moveSpeed: 5
   gravity: -9.81
   mouseSensitivityHorizontal: 20
@@ -201,11 +202,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player_animated
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 0428482d6ca72a14db7af3175d9f2b1b, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 9ee079ffe9d979e4384b89adcb917fd8, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0428482d6ca72a14db7af3175d9f2b1b, type: 3}
+--- !u!95 &684333045791461614 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 0428482d6ca72a14db7af3175d9f2b1b, type: 3}
+  m_PrefabInstance: {fileID: 6347164992113388927}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6890245278009117332 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0428482d6ca72a14db7af3175d9f2b1b, type: 3}

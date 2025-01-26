@@ -38,6 +38,8 @@ public class Enemy : MonoBehaviour, IInteractable, IBubbleable, IDamageable
 
     public event Action<Enemy> HealthChanged;
     public event Action<Enemy> Died;
+    
+    public bool IsBubbled => bubble != null;
 
     public void Spawn(Transform[] waypoints, Player player, Ship ship)
     {
@@ -93,7 +95,7 @@ public class Enemy : MonoBehaviour, IInteractable, IBubbleable, IDamageable
 
     private void MoveToWaypoint()
     {
-        if (currentWaypointIndex == waypoints.Length - 1)
+        if (currentWaypointIndex == waypoints.Length)
         {
             BeginAttackingShip();
         }
@@ -105,11 +107,7 @@ public class Enemy : MonoBehaviour, IInteractable, IBubbleable, IDamageable
 
     private void MoveToNextWaypoint()
     {
-        if (currentWaypointIndex == waypoints.Length - 1)
-        {
-            BeginAttackingShip();
-        }
-        else if (currentWaypointIndex < waypoints.Length - 1)
+        if (currentWaypointIndex < waypoints.Length)
         {
             currentWaypointIndex++;
             MoveToWaypoint();
@@ -121,13 +119,11 @@ public class Enemy : MonoBehaviour, IInteractable, IBubbleable, IDamageable
         isInterrupted = true;
         agent.isStopped = true;
         agent.enabled = false;
-        modelCollider.enabled = false;
     }
 
     public void Resume()
     {
         isInterrupted = false;
-        modelCollider.enabled = true;
         agent.enabled = true;
         agent.isStopped = false;
         MoveToWaypoint();
@@ -221,7 +217,7 @@ public class Enemy : MonoBehaviour, IInteractable, IBubbleable, IDamageable
     
     public void Bubble(Bubble bubble)
     {
-        // interrupt and float up into bubble, begin attack bubble
+        Debug.Log("Enemy bubbled");
         this.bubble = bubble;
         Interrupt();
         
@@ -232,6 +228,7 @@ public class Enemy : MonoBehaviour, IInteractable, IBubbleable, IDamageable
 
     public void PopBubble()
     {
+        Debug.Log("Enemy bubble popped");
         CancelAttack();
         bubble = null;
         
