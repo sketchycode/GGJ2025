@@ -12,6 +12,8 @@ public class Bubble : MonoBehaviour, IInteractable, IDamageable
     [SerializeField] private float maxHealth = 100f;
     [SerializeField] private float playerFollowDistance = 4f;
     [SerializeField] private float damagePerSecond = 10f;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip popBubbleClip;
     
     private CharacterController controller;
     private IBubbleable bubbleable;
@@ -42,10 +44,20 @@ public class Bubble : MonoBehaviour, IInteractable, IDamageable
     {
         if (player != null)
         {
-            var vectorToPlayer = player.transform.position - transform.position;
-            if (vectorToPlayer.magnitude > playerFollowDistance)
+            var vectorToPlayer = (player.transform.position - transform.position).ToXZ();
+            var distanceToPlayer = vectorToPlayer.magnitude;
+            if (distanceToPlayer > playerFollowDistance)
             {
-                controller.Move(vectorToPlayer.normalized.ToXZ() * (speed * Time.deltaTime));
+                var moveMagnitude = speed * Time.deltaTime;
+                var moveNormal = vectorToPlayer.normalized;
+                if (distanceToPlayer - moveMagnitude < playerFollowDistance)
+                {
+                    controller.Move(moveNormal * (distanceToPlayer - playerFollowDistance));
+                }
+                else
+                {
+                    controller.Move(moveNormal * moveMagnitude);
+                }
             }
         }
         bubbleable.TakeDamage(damagePerSecond * Time.deltaTime);
@@ -55,6 +67,7 @@ public class Bubble : MonoBehaviour, IInteractable, IDamageable
     {
         model.GetComponent<Collider>().enabled = false;
         bubbleable.PopBubble();
+        audioSource.PlayOneShot(popBubbleClip);
         Destroy(gameObject);
     }
 

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: FireTowerShotConfig
   m_EditorClassIdentifier: 
   Damage: 5
-  Speed: 2
+  Speed: 12
   Radius: 10

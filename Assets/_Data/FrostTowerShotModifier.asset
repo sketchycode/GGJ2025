@@ -9,9 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c03309b5b2d840cda85a0160eacb78fc, type: 3}
-  m_Name: DefaultTowerShotConfig
+  m_Script: {fileID: 11500000, guid: 5f92e52a9d6e47dd9ab1ccb1e8eeeeec, type: 3}
+  m_Name: FrostTowerShotModifier
   m_EditorClassIdentifier: 
-  Damage: 10
-  Speed: 15
-  Radius: 20
+  IsFireModifier: 0
+  CooldownModifier: 0.95
+  RangeModifier: 1.05
+  DamageModifier: 1.02
+  SpeedModifier: 1.1
+  SplashRadiusModifier: 1.02

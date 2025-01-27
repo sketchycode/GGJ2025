@@ -18,6 +18,7 @@ public class Tower : MonoBehaviour, IPowerUppable
     private float modifiedRange;
     private float modifiedCooldown;
 
+    public bool IsPowerUppable => true;
     public Transform AttachPoint => gunTransform;
 
     public void Spawn(TowerShotConfig shotConfig, TowerShotObjectPool shotPool, Collider[] reusableColliders)

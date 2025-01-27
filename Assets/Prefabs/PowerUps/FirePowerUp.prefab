@@ -44,6 +44,10 @@ PrefabInstance:
       propertyPath: model
       value: 
       objectReference: {fileID: 4470960451941743440}
+    - target: {fileID: 2084687650973897504, guid: ddb4023442f250949928589eb676a1cf, type: 3}
+      propertyPath: modifier
+      value: 
+      objectReference: {fileID: 11400000, guid: b657586643d6b6143812662f3fd0eb32, type: 2}
     - target: {fileID: 4762426504684236111, guid: ddb4023442f250949928589eb676a1cf, type: 3}
       propertyPath: m_Name
       value: FirePowerUp

@@ -12,10 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f92e52a9d6e47dd9ab1ccb1e8eeeeec, type: 3}
   m_Name: FireTowerShotModifier
   m_EditorClassIdentifier: 
-  launchParticleSystem: {fileID: 0}
-  travelParticleSystem: {fileID: 0}
-  CooldownModifier: 0.95
-  RangeModifier: 1.05
-  DamageModifier: 1.1
-  SpeedModifier: 1.1
-  SplashRadiusModifier: 1.1
+  IsFireModifier: 1
+  CooldownModifier: 0.99
+  RangeModifier: 1.02
+  DamageModifier: 1.05
+  SpeedModifier: 1.02
+  SplashRadiusModifier: 1.08

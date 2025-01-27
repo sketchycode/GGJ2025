@@ -120,6 +120,7 @@ public class PowerUp : MonoBehaviour, IInteractable, IBubbleable
             var hitCollider = hitColliders[i];
 
             var tower = hitCollider.GetComponentInParent<IPowerUppable>();
+            if (!tower.IsPowerUppable) continue;
             
             var distance= (hitCollider.transform.position - transform.position).sqrMagnitude;
             

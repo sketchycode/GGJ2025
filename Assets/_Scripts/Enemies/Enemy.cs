@@ -24,6 +24,10 @@ public class Enemy : MonoBehaviour, IInteractable, IBubbleable, IDamageable
     [SerializeField] private float attackSpeed = 1f;
     [SerializeField] private TowerShotConfig shotConfig;
     [SerializeField] private Animator animator;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip deathClip;
+
+    [SerializeField] private string description = "Enemy";
 
     private NavMeshAgent agent;
     private int currentWaypointIndex = 0;
@@ -31,6 +35,7 @@ public class Enemy : MonoBehaviour, IInteractable, IBubbleable, IDamageable
     private Transform[] waypoints;
     private Ship ship;
     private PowerUpObjectPool powerUpPool;
+    private EnemyObjectPool enemyPool;
     private Bubble bubble;
     private int floatUpAnimId = -1;
     private int spinAnimId = -1;
@@ -46,15 +51,20 @@ public class Enemy : MonoBehaviour, IInteractable, IBubbleable, IDamageable
     public event Action<Enemy> Died;
     
     public bool IsBubbled => bubble != null;
+    
+    public string Description => description;
 
-    public void Spawn(Ship ship, PowerUpObjectPool powerUpPool)
+    public void Spawn(Ship ship, Transform endGoal, PowerUpObjectPool powerUpPool, EnemyObjectPool enemyPool)
     {
-        this.waypoints = new [] { ship.transform };
+        waypoints = new [] { endGoal };
         this.ship = ship;
         this.powerUpPool = powerUpPool;
+        this.enemyPool = enemyPool;
         
         health = maxHealth;
         animator.SetBool(isRunningAnimId, true);
+        currentWaypointIndex = 0;
+        isInterrupted = false;
     }
     
     private void Awake()
@@ -135,6 +145,8 @@ public class Enemy : MonoBehaviour, IInteractable, IBubbleable, IDamageable
 
     public void Resume()
     {
+        if (!gameObject.activeInHierarchy) return;
+        
         isInterrupted = false;
         agent.enabled = true;
         agent.isStopped = false;
@@ -214,7 +226,14 @@ public class Enemy : MonoBehaviour, IInteractable, IBubbleable, IDamageable
 
     private void Die()
     {
-        Destroy(gameObject);
+        LeanTween.cancel(gameObject, floatUpAnimId);
+        LeanTween.cancel(gameObject, spinAnimId);
+        floatUpAnimId = -1;
+        spinAnimId = -1;
+
+        audioSource.PlayOneShot(deathClip);
+        agent.enabled = false;
+        LeanTween.delayedCall(gameObject, 0.3f, () => Destroy(gameObject));
         if (bubble != null) bubble.TakeDamage(bubble.Health);
 
         powerUpPool.Spawn(transform);

@@ -82,6 +82,7 @@ MonoBehaviour:
   moveInput: {fileID: 5957875943912597707, guid: 328af35925a824044822b340100995c5, type: 3}
   lookInput: {fileID: 4593678513171534074, guid: 328af35925a824044822b340100995c5, type: 3}
   interactInput: {fileID: -6812486663553711104, guid: 328af35925a824044822b340100995c5, type: 3}
+  sprintInput: {fileID: -718408941573057761, guid: 328af35925a824044822b340100995c5, type: 3}
   followTarget: {fileID: 661044304646825400}
   animator: {fileID: 684333045791461614}
   bubblePrefab: {fileID: 2674325371147267787, guid: 73c556afe95387a4abcb30fed86afd9a, type: 3}
@@ -89,10 +90,11 @@ MonoBehaviour:
   interactionLayer:
     serializedVersion: 2
     m_Bits: 10240
-  moveSpeed: 5
+  moveSpeed: 7
+  sprintSpeed: 12
   gravity: -9.81
-  mouseSensitivityHorizontal: 20
-  mouseSensitivityVertical: 15
+  mouseSensitivityHorizontal: 10
+  mouseSensitivityVertical: 10
   minVerticalLookAngle: -20
   maxVerticalLookAngle: 40
 --- !u!143 &4286131408860536058
@@ -113,7 +115,7 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 2
+  m_Height: 1.65
   m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3
