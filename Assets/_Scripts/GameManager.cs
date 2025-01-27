@@ -68,7 +68,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator StartGame()
     {
-        yield return StartWave(waveConfigs[currentWaveIndex], 10f);
+        yield return StartNextWave(10f);
     }
 
     private void InitializeGameScene()
@@ -117,14 +117,14 @@ public class GameManager : MonoBehaviour
         crabObjectPool.EndGoal = level.EndGoalPoint;
     }
     
-    private IEnumerator StartWave(EnemyWaveConfig config, float delay)
+    private IEnumerator StartNextWave(float delay)
     {
         InAttackPhase = false;
         BuildPhaseRemainingTime = delay;
         yield return new WaitForSeconds(delay);
 
         InAttackPhase = true;
-        foreach (var enemySpawn in config.Wave)
+        foreach (var enemySpawn in waveConfigs[currentWaveIndex].Wave)
         {
             for (int i = 0; i < enemySpawn.Count; i++)
             {
@@ -133,14 +133,14 @@ public class GameManager : MonoBehaviour
                 enemy.Died += OnEnemy_Died;
             }
         }
+        currentWaveIndex++;
     }
 
     private void HandleWaveCompleted()
     {
-        currentWaveIndex++;
         if (currentWaveIndex < waveConfigs.Count)
         {
-            StartCoroutine(StartWave(waveConfigs[currentWaveIndex], timeBetweenWaves));
+            StartCoroutine(StartNextWave(timeBetweenWaves));
         }
         else
         {

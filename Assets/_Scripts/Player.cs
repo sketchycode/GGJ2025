@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     [SerializeField] private InputActionReference moveInput;
     [SerializeField] private InputActionReference lookInput;
     [SerializeField] private InputActionReference interactInput;
+    [SerializeField] private InputActionReference sprintInput;
     
     [Header("Internal References")]
     [SerializeField] private Transform followTarget;
@@ -18,7 +19,8 @@ public class Player : MonoBehaviour
     [SerializeField] private LayerMask interactionLayer; 
 
     [Header("Movement Settings")]
-    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float moveSpeed = 7f;
+    [SerializeField] private float sprintSpeed = 12f;
     [SerializeField] private float gravity = -9.81f;
     
     [Header("Mouse Settings")]
@@ -36,6 +38,7 @@ public class Player : MonoBehaviour
     private float cameraTiltValue; // Tracks vertical camera rotation
     private readonly Collider[] hitColliders = new Collider[10];
     private IInteractable closestInteractable;
+    private bool isSprinting;
     
     public Transform FollowTarget => followTarget;
     public IInteractable ClosestInteractable => closestInteractable;
@@ -61,6 +64,10 @@ public class Player : MonoBehaviour
         
         interactInput.action.Enable();
         interactInput.action.performed += OnInteractInput_Performed;
+        
+        sprintInput.action.Enable();
+        sprintInput.action.performed += OnSprintInput_Performed;
+        sprintInput.action.canceled += OnSprintInput_Canceled;
     }
 
     private void OnDisable()
@@ -75,6 +82,10 @@ public class Player : MonoBehaviour
         
         interactInput.action.Disable();
         interactInput.action.performed -= OnInteractInput_Performed;
+        
+        sprintInput.action.Disable();
+        sprintInput.action.performed -= OnSprintInput_Performed;
+        sprintInput.action.canceled -= OnSprintInput_Canceled;
     }
 
     private void Update()
@@ -97,7 +108,7 @@ public class Player : MonoBehaviour
             velocity.y = gravity;
         }
         velocity.y += gravity * Time.deltaTime;
-        move *= moveSpeed;
+        move *= isSprinting ? sprintSpeed : moveSpeed;
         move.y = velocity.y;
         controller.Move(move * Time.deltaTime);
     }
@@ -112,6 +123,31 @@ public class Player : MonoBehaviour
         cameraTiltValue -= mouseY;
         cameraTiltValue = Mathf.Clamp(cameraTiltValue, minVerticalLookAngle, maxVerticalLookAngle);
         followTarget.localRotation = Quaternion.Euler(cameraTiltValue, 0f, 0f);
+    }
+    
+    private void GetClosestInteractable()
+    {
+        var hitCount = Physics.OverlapSphereNonAlloc(followTarget.position, interactRange, hitColliders, interactionLayer);
+        closestInteractable = null;
+        float closestDistance = Mathf.Infinity;
+
+        for (int i = 0; i < hitCount && i < hitColliders.Length; i++)
+        {
+            var hitCollider = hitColliders[i];
+            Vector3 directionToObject = (hitCollider.transform.position - followTarget.position).normalized;
+
+            float angle = Vector3.Angle(transform.forward, directionToObject);
+            if (angle <= 45f) // either side of the forward vector
+            {
+                float distance = Vector3.Distance(followTarget.position, hitCollider.transform.position);
+                IInteractable interactable = hitCollider.GetComponentInParent<IInteractable>();
+                if (interactable != null && interactable.CanInteract && distance < closestDistance)
+                {
+                    closestInteractable = interactable;
+                    closestDistance = distance;
+                }
+            }
+        }
     }
 
     // Event callback when movement input is performed
@@ -140,29 +176,14 @@ public class Player : MonoBehaviour
     {
         closestInteractable?.Interact();
     }
-    
-    private void GetClosestInteractable()
+
+    private void OnSprintInput_Performed(InputAction.CallbackContext obj)
     {
-        var hitCount = Physics.OverlapSphereNonAlloc(followTarget.position, interactRange, hitColliders, interactionLayer);
-        closestInteractable = null;
-        float closestDistance = Mathf.Infinity;
+        isSprinting = true;
+    }
 
-        for (int i = 0; i < hitCount && i < hitColliders.Length; i++)
-        {
-            var hitCollider = hitColliders[i];
-            Vector3 directionToObject = (hitCollider.transform.position - followTarget.position).normalized;
-
-            float angle = Vector3.Angle(transform.forward, directionToObject);
-            if (angle <= 45f) // either side of the forward vector
-            {
-                float distance = Vector3.Distance(followTarget.position, hitCollider.transform.position);
-                IInteractable interactable = hitCollider.GetComponentInParent<IInteractable>();
-                if (interactable != null && interactable.CanInteract && distance < closestDistance)
-                {
-                    closestInteractable = interactable;
-                    closestDistance = distance;
-                }
-            }
-        }
+    private void OnSprintInput_Canceled(InputAction.CallbackContext obj)
+    {
+        isSprinting = false;
     }
 }

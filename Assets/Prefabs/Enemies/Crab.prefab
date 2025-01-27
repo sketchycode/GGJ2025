@@ -46,7 +46,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 54178fea37ee81544899c27bc779df8e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1
+      value: -1.12
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 54178fea37ee81544899c27bc779df8e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -191,6 +191,10 @@ PrefabInstance:
     - target: {fileID: 7253698132920331944, guid: 00ac4a711d5a44a44afe56702d66d72e, type: 3}
       propertyPath: maxHealth
       value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 7253698132920331944, guid: 00ac4a711d5a44a44afe56702d66d72e, type: 3}
+      propertyPath: shotConfig
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7253698132920331944, guid: 00ac4a711d5a44a44afe56702d66d72e, type: 3}
       propertyPath: attackSpeed

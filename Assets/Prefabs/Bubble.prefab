@@ -50,7 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 8104442740283121721}
   captureAttachTransform: {fileID: 6321386550447408060}
-  speed: 4
+  speed: 10
   maxHealth: 100
   playerFollowDistance: 4
   damagePerSecond: 10
