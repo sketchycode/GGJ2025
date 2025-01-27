@@ -48,6 +48,7 @@ public class GameManager : MonoBehaviour
     public int EnemiesRemainingCurrentWave { get; private set; }
     public float ShipHealth => ship.CurrentHealth;
     public float ShipMaxHealth => ship.MaxHealth;
+    public Player Player => player;
     
     private void Start()
     {

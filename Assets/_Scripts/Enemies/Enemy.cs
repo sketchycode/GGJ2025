@@ -27,6 +27,8 @@ public class Enemy : MonoBehaviour, IInteractable, IBubbleable, IDamageable
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip deathClip;
 
+    [SerializeField] private string description = "Enemy";
+
     private NavMeshAgent agent;
     private int currentWaypointIndex = 0;
     private bool isInterrupted = false;
@@ -49,6 +51,8 @@ public class Enemy : MonoBehaviour, IInteractable, IBubbleable, IDamageable
     public event Action<Enemy> Died;
     
     public bool IsBubbled => bubble != null;
+    
+    public string Description => description;
 
     public void Spawn(Ship ship, Transform endGoal, PowerUpObjectPool powerUpPool, EnemyObjectPool enemyPool)
     {

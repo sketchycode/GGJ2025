@@ -13,6 +13,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private ProgressBar shipHealthBar;
     [SerializeField] private Color MaxHealthColor = ColorExtensions.FromHex(0x41E052);
     [SerializeField] private Color MinHealthColor = ColorExtensions.FromHex(0xE0414D);
+    [SerializeField] private GameObject interactButton;
+    [SerializeField] private TextMeshProUGUI interactDescription;
     
     private void Update()
     {
@@ -33,6 +35,20 @@ public class UIManager : MonoBehaviour
             enemiesRemainingLabelContainer.SetActive(false);
             timeRemainingLabelContainer.SetActive(true);
             timeRemainingLabel.text = $"{gameManager.BuildPhaseRemainingTime:F1}s";
+        }
+
+        interactButton.SetActive(gameManager.Player.ClosestInteractable != null);
+        interactDescription.text = GetInteractableDescription();
+    }
+
+    private string GetInteractableDescription()
+    {
+        switch (gameManager.Player.ClosestInteractable)
+        {
+            case Bubble _: return "Pop Bubble";
+            case PowerUp _: return "Bubble PowerUp";
+            case Enemy enemy: return $"Bubble {enemy.Description}";
+            default: return "";
         }
     }
 }
