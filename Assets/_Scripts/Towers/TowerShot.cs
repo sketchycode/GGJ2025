@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class TowerShot : MonoBehaviour
 {
@@ -10,13 +11,15 @@ public class TowerShot : MonoBehaviour
     private Collider[] hitColliders;
     private TowerShotObjectPool shotPool;
     private IReadOnlyList<TowerShotModifier> modifiers;
+    private VisualEffectObjectPool impactVfxPool;
 
-    public void SpawnInit(TowerShotConfig config, Collider[] reusableColliders, TowerShotObjectPool shotPool, IReadOnlyList<TowerShotModifier> modifiers)
+    public void SpawnInit(TowerShotConfig config, Collider[] reusableColliders, TowerShotObjectPool shotPool, IReadOnlyList<TowerShotModifier> modifiers, VisualEffectObjectPool impactVfxPool)
     {
         this.config = Instantiate(config);
         hitColliders = reusableColliders;
         this.shotPool = shotPool;
         this.modifiers = modifiers;
+        this.impactVfxPool = impactVfxPool;
     }
 
     public void Target(Vector3 target)
@@ -65,7 +68,7 @@ public class TowerShot : MonoBehaviour
             var enemy = hitCollider.GetComponentInParent<Enemy>();
             enemy.TakeDamage(damage);
         }
-        
+        impactVfxPool.Spawn(transform);
         shotPool.Despawn(this);
     }
 
