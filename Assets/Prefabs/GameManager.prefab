@@ -35,6 +35,8 @@ Transform:
   - {fileID: 4482476053875617713}
   - {fileID: 1701030867151152143}
   - {fileID: 487498297759169114}
+  - {fileID: 6578893985336760136}
+  - {fileID: 6052275053488360002}
   m_Father: {fileID: 5637034355029330649}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &23210887214734932
@@ -191,6 +193,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 6915933288801415747, guid: 54b83d8e477f058498a858e472189bca, type: 3}
   initialPoolSize: 30
+  impactVfxPool: {fileID: 6169113543041073168}
 --- !u!1 &2946852969865893334
 GameObject:
   m_ObjectHideFlags: 0
@@ -238,6 +241,52 @@ MonoBehaviour:
   prefab: {fileID: 3558296868853722477, guid: a2d0bcc0866593d4db86f229b6b41e8d, type: 3}
   initialPoolSize: 10
   powerUpObjectPool: {fileID: 3262803773171718314}
+--- !u!1 &3223185572184251333
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6052275053488360002}
+  - component: {fileID: 3611779301335142742}
+  m_Layer: 0
+  m_Name: FrostExplosion
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6052275053488360002
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3223185572184251333}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 641752843599096569}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3611779301335142742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3223185572184251333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdf3738709174a10968a52cc04e1d9e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 2619790268858027370, guid: 9b2c7d921ca6f2742be2c46528d61a8b, type: 3}
+  initialPoolSize: 10
 --- !u!1 &3421200306212983820
 GameObject:
   m_ObjectHideFlags: 0
@@ -300,6 +349,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 8052901720212006765, guid: c0499d75e590d7f48a9f754e17272e78, type: 3}
   initialPoolSize: 10
+  impactVfxPool: {fileID: 3611779301335142742}
 --- !u!1 &3870585637079440520
 GameObject:
   m_ObjectHideFlags: 0
@@ -363,8 +413,54 @@ MonoBehaviour:
   crabObjectPool: {fileID: 3212534433061336088}
   waveConfigs: []
   timeBetweenWaves: 30
-  shotConfig: {fileID: 11400000, guid: 524441a2b69127846b1c3b0c26a525b7, type: 2}
-  shotModifier: {fileID: 11400000, guid: c9b09f59369725d42898a62427510bd8, type: 2}
+  startNextWaveAction: {fileID: -7267690923261155636, guid: 9b23b626f0002ae419cac688de3addbc, type: 3}
+  pauseGameAction: {fileID: -821214431795696322, guid: 9b23b626f0002ae419cac688de3addbc, type: 3}
+--- !u!1 &5201865287598441829
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6578893985336760136}
+  - component: {fileID: 6169113543041073168}
+  m_Layer: 0
+  m_Name: FireballExplosion
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6578893985336760136
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5201865287598441829}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 641752843599096569}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6169113543041073168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5201865287598441829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdf3738709174a10968a52cc04e1d9e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 5956184947336034738, guid: 811eff18e7ad61f44aa4f7fd5dcbabe0, type: 3}
+  initialPoolSize: 10
 --- !u!1 &7546982398831990473
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -32,14 +34,15 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<EnemyWaveConfig> waveConfigs;
     [SerializeField] private float timeBetweenWaves = 30f;
     
-    [Header("Debug Stuff")]
-    [SerializeField] private TowerShotConfig shotConfig;
-    [SerializeField] private TowerShotModifier shotModifier;
+    [Header("Game Controls")]
+    [SerializeField] private InputActionReference startNextWaveAction;
+    [SerializeField] private InputActionReference pauseGameAction;
     
     private Player player;
     private Ship ship;
     
     private int currentWaveIndex;
+    private Coroutine nextWaveCoroutine;
 
     public int CurrentWave => currentWaveIndex;
     public int MaxWaves => waveConfigs.Count;
@@ -49,13 +52,22 @@ public class GameManager : MonoBehaviour
     public float ShipHealth => ship.CurrentHealth;
     public float ShipMaxHealth => ship.MaxHealth;
     public Player Player => player;
-    
+
+    private void Awake()
+    {
+        startNextWaveAction.action.Enable();
+        startNextWaveAction.action.performed += OnStartNextWave_Performed;
+        
+        pauseGameAction.action.Enable();
+        pauseGameAction.action.performed += OnPauseGame_Performed;
+    }
+
     private void Start()
     {
         InitializeGameScene();
         ConfigureObjectPools();
         
-        StartCoroutine(StartGame());
+        StartGame();
     }
 
     private void Update()
@@ -67,9 +79,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private IEnumerator StartGame()
+    private void StartGame()
     {
-        yield return StartNextWave(10f);
+        nextWaveCoroutine = StartCoroutine(StartNextWave(10f));
     }
 
     private void InitializeGameScene()
@@ -141,7 +153,7 @@ public class GameManager : MonoBehaviour
     {
         if (currentWaveIndex < waveConfigs.Count)
         {
-            StartCoroutine(StartNextWave(timeBetweenWaves));
+            nextWaveCoroutine = StartCoroutine(StartNextWave(timeBetweenWaves));
         }
         else
         {
@@ -172,5 +184,18 @@ public class GameManager : MonoBehaviour
     private void OnShip_Died(Ship obj)
     {
         HandleLoseGame();
+    }
+
+    private void OnStartNextWave_Performed(InputAction.CallbackContext obj)
+    {
+        if (InAttackPhase) return;
+        
+        StopCoroutine(nextWaveCoroutine);
+        nextWaveCoroutine = StartCoroutine(StartNextWave(0));
+    }
+
+    private void OnPauseGame_Performed(InputAction.CallbackContext obj)
+    {
+        Debug.Log("Pause Game");
     }
 }

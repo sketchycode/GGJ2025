@@ -110,6 +110,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4384221500905550291, guid: d9ca2b58e9318c24dad3b2d7c573ca78, type: 3}
+      propertyPath: impactEffect
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6622018485588574425, guid: d9ca2b58e9318c24dad3b2d7c573ca78, type: 3}
       propertyPath: m_Name
       value: TowerShot-Fire

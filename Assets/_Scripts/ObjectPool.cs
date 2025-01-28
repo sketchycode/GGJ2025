@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-public abstract class ObjectPool<T> : MonoBehaviour where T : MonoBehaviour
+public abstract class ObjectPool<T> : MonoBehaviour where T : Behaviour
 {
     [SerializeField] private T prefab;
     [SerializeField] private int initialPoolSize = 10;
